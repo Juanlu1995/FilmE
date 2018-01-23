@@ -1,0 +1,12 @@
+
+.centered-rating {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+}
+
+.navbar{
+    margin-bottom: 1em;
+}
