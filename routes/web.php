@@ -15,3 +15,7 @@ Route::get('/', 'PagesController@index');
 
 // Rutas de películas
 Route::get('/films/create', 'FilmsController@create');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
