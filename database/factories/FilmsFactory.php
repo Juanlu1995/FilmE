@@ -34,6 +34,8 @@ $factory->define(\App\Film::class, function (Faker $faker) {
         "terror‎",
         "Wéstern‎",
     ];
+    $time1 = Carbon::createFromTimestamp($faker->dateTimeThisDecade()->getTimestamp());
+    $time2 = Carbon::createFromTimestamp($faker->dateTimeThisDecade()->getTimestamp());
 
     return [
         'name' => $faker->unique()->name,
@@ -48,6 +50,8 @@ $factory->define(\App\Film::class, function (Faker $faker) {
         'producer' => $faker->company,
         'reviews_counted' => 0,
         'views_counted' => 0,
-        'country' => $faker->country
+        'country' => $faker->country,
+        'created_at'=> ($time1 < $time2) ? $time1 : $time2,
+        'updated_at'=> ($time1 > $time2) ? $time1 : $time2
     ];
 });
