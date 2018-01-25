@@ -14,7 +14,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $films = Film::orderBy('views_counted','desc')->paginate(15);
+        $films = Film::orderBy('created_at','dec')->paginate(15);
 
         return view('home', ['films' => $films]);
     }

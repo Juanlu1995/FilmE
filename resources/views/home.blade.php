@@ -7,8 +7,10 @@
     @forelse($films as $film)
         <div class="row">
             <div class="col-md-4">
-                <img src="{{$film['cover']}}" alt="{{$film['name']}} cover" class="img-fluid img-thumbnail">
-                <div class="centered-rating"><h1 class="display-3">{{ $film['rating'] }}</h1></div>
+                <a href="/films/show/{{ $film['id'] }}">
+                    <img src="{{$film['cover']}}" alt="{{$film['name']}} cover" class="img-fluid img-thumbnail">
+                    <div class="centered-rating"><h1 class="display-3">{{ $film['rating'] }}</h1></div>
+                </a>
             </div>
             <div class="col-8">
                 <div class="row">

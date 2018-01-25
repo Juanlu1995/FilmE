@@ -41,15 +41,12 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
+                @auth()
 
                 <ul class="nav navbar-nav">
                     &nbsp;
-
                     {{--@todo bloquear a usuarios no logueados--}}
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{ url("/") }}">Home @if(Request::is("/"))<span class="sr-only">(current)</span>@endif
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/films/discover">Discover @if(Request::is("/films/discover"))<span
                                     class="sr-only">(current)</span>@endif</a>
@@ -58,8 +55,12 @@
                         <a class="nav-link" href="/profile">Profile @if(Request::is("/profile"))<span class="sr-only">(current)</span>@endif
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/films/create">Create @if(Request::is("/films/create"))<span class="sr-only">(current)</span>@endif
+                        </a>
+                    </li>
                 </ul>
-
+                @endauth
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->

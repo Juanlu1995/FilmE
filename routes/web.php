@@ -15,6 +15,9 @@ Route::get('/', 'PagesController@index');
 
 // Rutas de películas
 Route::get('/films/create', 'FilmsController@create');
+Route::post('/films/create', 'FilmsController@store');
+Route::get('/films/show/{idFilm}', 'FilmsController@show');
+
 
 Auth::routes();
 
