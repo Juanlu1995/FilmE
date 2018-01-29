@@ -49,6 +49,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'username' => 'required|alpha_dash|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -62,9 +64,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $und = 'Undefined';
+
         return User::create([
-            'name' => $data['name'],
+            'name' => ucwords(strtolower($data['name'])),
+            'last_name' => ucwords(strtolower($data['lastName'])),
+            'username' => $data['username'],
+            'avatar' => "http://www.underconsideration.com/wordit/wordit_archives/0401_empty_James_Ketsdever_2.jpg",
             'email' => $data['email'],
+            'phone' => $und,
+            'website' => $und,
+            'about' => $und,
             'password' => bcrypt($data['password']),
         ]);
     }
