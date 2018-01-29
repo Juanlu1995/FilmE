@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Film;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+//        @todo ¿para qué sirve este controlador?
+        return view('home', ['films' => Film::orderBy('created_at','dec')->paginate(15)]);
     }
 }
