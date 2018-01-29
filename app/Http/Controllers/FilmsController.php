@@ -52,8 +52,7 @@ class FilmsController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        $film = Film::where('id',$id)->get();
+    public function show(Film $film) {
 
         return view('films.show',[
             "film" => $film

@@ -19,8 +19,9 @@ $factory->define(App\User::class, function (Faker $faker) {
     $username = strtolower($name).".".strtolower($lastNane);
     return [
         'name' => $name,
-        'lastName' => $lastNane,
+        'last_name' => $lastNane,
         'username' => $username,
+        'avatar' => 'http://www.unixstickers.com/image/data/stickers/tuxBW/Little-tux-b-w.sh.png',
         'email' => $username."@".$faker->safeEmailDomain,
         'phone' => $faker->e164PhoneNumber(),
         'website' => $faker->boolean ? $faker->domainName : "Undefined",
