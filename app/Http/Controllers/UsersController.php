@@ -41,7 +41,8 @@ class UsersController extends Controller {
      * @param  User user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user) {
+    public function show($username) {
+        $user = User::where('username', $username)->first();
         return view('users.show', ['user' => $user]);
     }
 
