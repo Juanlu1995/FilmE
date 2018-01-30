@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://image.flaticon.com/icons/png/128/83/83519.png">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -41,6 +42,7 @@
                         {{--@todo bloquear a usuarios no logueados--}}
 
                         <li class="nav-item">
+                            {{--@todo arreglar active span--}}
                             <a class="nav-link" href="/films/discover">Discover @if(Request::is("/films/discover"))<span
                                         class="sr-only">(current)</span>@endif</a>
                         </li>
