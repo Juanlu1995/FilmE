@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <script src="js/validateLogin.js"></script>
+@endpush
+
 @section('content')
 <div class="container">
     <div class="row justify-content-md-center mt-5">
@@ -11,7 +15,7 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Name</label>
+                            <label class="col-lg-4 col-form-label text-lg-right" for="name">Name</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -20,6 +24,7 @@
                                         name="name"
                                         value="{{ old('name') }}"
                                         required
+                                        id="name"
                                 >
                                 @if ($errors->has('name'))
                                     <div class="invalid-feedback">
@@ -30,7 +35,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Last Name</label>
+                            <label class="col-lg-4 col-form-label text-lg-right" for="lastName">Last Name</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -39,6 +44,7 @@
                                         name="lastName"
                                         value="{{ old('lastName') }}"
                                         required
+                                        id="lastName"
                                 >
                                 @if ($errors->has('lastName'))
                                     <div class="invalid-feedback">
@@ -49,7 +55,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Username</label>
+                            <label class="col-lg-4 col-form-label text-lg-right" for="username">Username</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -58,6 +64,7 @@
                                         name="username"
                                         value="{{ old('username') }}"
                                         required
+                                        id="username"
                                 >
                                 @if ($errors->has('username'))
                                     <div class="invalid-feedback">
@@ -68,7 +75,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">E-Mail Address</label>
+                            <label class="col-lg-4 col-form-label text-lg-right" for="email">E-Mail Address</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -77,6 +84,7 @@
                                         name="email"
                                         value="{{ old('email') }}"
                                         required
+                                        id="email"
                                 >
 
                                 @if ($errors->has('email'))
@@ -88,7 +96,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Password</label>
+                            <label class="col-lg-4 col-form-label text-lg-right" for="password">Password</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -96,6 +104,7 @@
                                         class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
                                         name="password"
                                         required
+                                        id="password"
                                 >
                                 @if ($errors->has('password'))
                                     <div class="invalid-feedback">
@@ -106,7 +115,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label text-lg-right">Confirm Password</label>
+                            <label class="col-lg-4 col-form-label text-lg-right" for="repassword">Confirm Password</label>
 
                             <div class="col-lg-6">
                                 <input
@@ -114,6 +123,7 @@
                                         class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
                                         name="password_confirmation"
                                         required
+                                        id="repassword"
                                 >
                                 @if ($errors->has('password_confirmation'))
                                     <div class="invalid-feedback">
@@ -125,7 +135,7 @@
 
                         <div class="form-group row">
                             <div class="col-lg-6 offset-lg-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="registerButton">
                                     Register
                                 </button>
                             </div>

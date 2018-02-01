@@ -4390,7 +4390,6 @@ tbody.collapse.show {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 0.5rem 1rem;
-  margin-bottom: 2em;
 }
 
 .navbar > .container,
@@ -9995,10 +9994,3 @@ a.text-dark:focus {
   }
 }
 
-.centered-rating {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: red;
-}

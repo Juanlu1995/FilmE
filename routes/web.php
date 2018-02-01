@@ -22,6 +22,7 @@ Route::get('/users/{username}', 'UsersController@show');
 Route::get('/profile','UsersController@profile')->middleware("auth");
 
 
+Route::post('/register/validate','Auth\RegisterController@validateAJAX')->middleware('guest');
 Auth::routes();
 
 //Route::get('/', 'HomeController@index')->name('home');
