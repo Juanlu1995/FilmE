@@ -32,6 +32,56 @@ class RegisterUserRequest extends FormRequest {
 
 //    @todo mensajes personalizados
 
+    public function messages() {
+        $messagesName = $this->messagesName();
+        $messagesLastName = $this->messagesLastName();
+        $messagesUsername = $this->messagesUsername();
+        $messagesEmail = $this->messagesEmail();
+        $mensajes = array_merge(
+            $messagesName,
+            $messagesLastName,
+            $messagesUsername,
+            $messagesEmail
+        );
+        return $mensajes;
+
+    }
+
+
+    protected function messagesName() {
+        $messages = array();
+        $messages["name.required"] = 'El nombre es requerido';
+        $messages["name.regex"] = 'El nombre sólo acepta letras y espacios';
+        $messages["name.max"] = 'Supera el máximo';
+        return $messages;
+    }
+
+    protected function messagesLastName() {
+        $messages = array();
+        $messages["lastName.required"] = 'El apellido es requerido';
+        $messages["lastName.regex"] = 'El apellido sólo acepta letras y espacios';
+        $messages["lastName.max"] = 'Supera el máximo';
+        return $messages;
+    }
+
+    protected function messagesUsername() {
+        $messages = array();
+        $messages["username.required"] = 'El nombre de usuario es requerido';
+        $messages["username.alpha_dash"] = 'El nombre de usuario sólo acepta letras, números y signos de puntuación';
+        $messages["username.max"] = 'Supera el máximo';
+        $messages["username.unique"] = 'El nombre de usuario no está disponible';
+        return $messages;
+    }
+
+    protected function messagesEMail() {
+        $messages = array();
+        $messages["email.required"] = 'El email es requerido';
+        $messages["email.email"] = 'No es un email válido';
+        $messages["email.max"] = 'Supera el máximo';
+        $messages["email.unique"] = 'El email no está disponible';
+        return $messages;
+    }
+
 
     /**
      * here, we are stablishing the validation rules
@@ -39,18 +89,18 @@ class RegisterUserRequest extends FormRequest {
      * @return string rules of valdations
      */
     protected function validateName() {
-        return 'required|alpha|max:255';
+        return 'required|regex:/^[\pL\s\-]+$/u|max:255';
     }
 
-    protected function validateLastName(){
-           return 'required|alpha|max:255';
+    protected function validateLastName() {
+        return 'required|regex:/^[\pL\s\-]+$/u|max:255';
     }
 
-    protected function validateUsername(){
+    protected function validateUsername() {
         return 'required|alpha_dash|max:255|unique:users';
     }
 
-    protected function validateEmail(){
-        return 'required|string|email|max:255|unique:users';
+    protected function validateEmail() {
+        return 'required|email|max:255|unique:users';
     }
 }

@@ -10448,20 +10448,17 @@ module.exports = __webpack_require__(47);
 /***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var $ = __webpack_require__(2);
 
 function gestionarErrores(input, errores) {
-    var hayErrores = false;
-    var divErrores = input.next();
-    divErrores.html("");
-    input.removeClass("bg-success bg-danger");
-    if (errores.length === 0) {
-        input.addClass("bg-success");
-    } else {
-        hayErrores = true;
-        input.addClass("bg-danger");
+    var noSendForm = false;
+    input = $(input);
+    if ((typeof errores === "undefined" ? "undefined" : _typeof(errores)) !== ( true ? "undefined" : _typeof(undefined))) {
+        input.removeClass("is-invalid");
+        input.addClass("is-invalid");
+        input.nextAll(".invalid-feedback").remove();
         var _iteratorNormalCompletion = true;
         var _didIteratorError = false;
         var _iteratorError = undefined;
@@ -10470,7 +10467,7 @@ function gestionarErrores(input, errores) {
             for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                 var error = _step.value;
 
-                divErrores.append("<div>" + error + "</div>");
+                input.after("<div class=\"invalid-feedback\">\n                <strong> " + error + " </strong>\n            </div>");
             }
         } catch (err) {
             _didIteratorError = true;
@@ -10486,79 +10483,73 @@ function gestionarErrores(input, errores) {
                 }
             }
         }
+
+        noSendForm = true;
+    } else {
+        input.removeClass("is-invalid");
+        input.addClass("is-valid");
+        input.nextAll(".invalid-feedback").remove();
     }
-    input.parent().next().remove();
-    return hayErrores;
+    return noSendForm;
 }
 
-function incluirSpinner(input) {
-    if (input.parent().next().length === 0) {
-        var spin = $(".spinner").first().clone(true);
-        input.parent().after(spin);
-        spin.show();
-    }
-}
-
-var paramsAxios = function paramsAxios(param, value) {
-    _classCallCheck(this, paramsAxios);
-
-    this.param = param;
-};
-
-//@todo preguntar para que una sola petición axios se pueda utilizar para todos los valores.
-
-
-function validateName(name) {
-    axios.post('/register/validate', {
-        name: name.value
-    }).then(function (response) {
-        gestionarErrores(name, response.data.name);
+function validateTarget(target) {
+    var formData = new FormData();
+    formData.append(target.id, target.value);
+    $(target).next(".spinner").addClass("sk-circle");
+    axios.post('/register/validate', formData).then(function (response) {
+        $(target).next(".spinner").removeClass("sk-circle");
+        switch (target.id) {
+            case "name":
+                gestionarErrores(target, response.data.name);
+                break;
+            case "lastName":
+                gestionarErrores(target, response.data.lastName);
+                break;
+            case "username":
+                gestionarErrores(target, response.data.username);
+                break;
+            case "email":
+                gestionarErrores(target, response.data.email);
+                break;
+        }
     }).catch(function (error) {
         console.log(error);
     });
 }
 
-function validateLastName(lastName) {
-    axios.post('/register/validate', {
-        lastName: lastName.value
-    }).then(function (response) {
-        gestionarErrores(lastName, response.data.lastName);
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-function validateUsername(username) {
-    axios.post('/register/validate', {
-        username: username.value
-    }).then(function (response) {
-        gestionarErrores(username, response.data.username);
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-function validateEmail(email) {
-    axios.post('/register/validate', {
-        email: email.value
-    }).then(function (response) {
-        gestionarErrores(email, response.data.email);
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
 $(function () {
-    $("#name").on('change', function (e) {
-        validateName(e.target);
+    $("#name,#lastName,#username,#email").on('change', function (e) {
+        validateTarget(e.target);
     });
-    $("#lastName").on('change', function (e) {
-        validateLastName(e.target);
-    });
-    $("#username").on('change', function (e) {
-        validateUsername(e.target);
-    });
-    $("#email").on('change', function (e) {
-        validateEmail(e.target);
+
+    $("#registerButton").click(function (e) {
+        e.preventDefault();
+        var sendForm = true;
+        var formData = new FormData();
+        formData.append('name', $("#name").val());
+        formData.append('lastName', $("#lastName").val());
+        formData.append('username', $("#username").val());
+        formData.append('email', $("#email").val());
+
+        axios.post('/register/validate', formData).then(function (response) {
+            if (gestionarErrores("#name", response.data.name)) {
+                sendForm = false;
+            }
+            if (gestionarErrores("#lastName", response.data.lastName)) {
+                sendForm = false;
+            }
+            if (gestionarErrores("#username", response.data.username)) {
+                sendForm = false;
+            }
+            if (gestionarErrores("#email", response.data.email)) {
+                sendForm = false;
+            }
+
+            if (sendForm === true) {
+                $("#registerForm").submit();
+            }
+        });
     });
 });
 
