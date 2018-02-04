@@ -12,4 +12,6 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
+    .js('resources/assets/js/validateLogin.js', 'public/js')
+    .styles(['resources/assets/css/spinner.css', 'resources/assets/css/own.css'], 'public/css/all.css')
     .sass('resources/assets/sass/app.scss', 'public/css');
