@@ -1,0 +1,4 @@
+language: php
+install: ./install-dependencies.sh
+php:
+  - '7.2'
