@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-md-center mt-5">
+        <div class="row justify-content-md-center mt-6">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Register</div>
@@ -26,14 +26,14 @@
                                                 required
                                                 id="name"
                                         >
-                                        @if ($errors->has('name'))
+                                    @if ($errors->has('name'))
                                             <div class="invalid-feedback">
                                                 <strong>{{ $errors->first('name') }}</strong>
                                             </div>
                                         @endif
-                                        @include('layouts.spinner')
 
                                     </div>
+                                @include('layouts.spinner')
                             </div>
 
                             <div class="form-group row">
@@ -48,14 +48,14 @@
                                             required
                                             id="lastName"
                                     >
-                                    @if ($errors->has('lastName'))
+                                @if ($errors->has('lastName'))
                                         <div class="invalid-feedback">
                                             <strong>{{ $errors->first('lastName') }}</strong>
                                         </div>
                                     @endif
-                                    @include('layouts.spinner')
 
                                 </div>
+                                @include('layouts.spinner')
                             </div>
 
                             <div class="form-group row">
@@ -70,14 +70,15 @@
                                             required
                                             id="username"
                                     >
-                                    @if ($errors->has('username'))
+                                @if ($errors->has('username'))
                                         <div class="invalid-feedback">
                                             <strong>{{ $errors->first('username') }}</strong>
                                         </div>
                                     @endif
-                                    @include('layouts.spinner')
 
                                 </div>
+                                @include('layouts.spinner')
+
                             </div>
 
                             <div class="form-group row">
@@ -93,14 +94,15 @@
                                             id="email"
                                     >
 
-                                    @if ($errors->has('email'))
+                                @if ($errors->has('email'))
                                         <div class="invalid-feedback">
                                             <strong>{{ $errors->first('email') }}</strong>
                                         </div>
                                     @endif
-                                    @include('layouts.spinner')
 
                                 </div>
+                                @include('layouts.spinner')
+
                             </div>
 
                             <div class="form-group row">
@@ -114,12 +116,12 @@
                                             required
                                             id="password"
                                     >
-                                    @if ($errors->has('password'))
+                                    @include('layouts.spinner')
+                                @if ($errors->has('password'))
                                         <div class="invalid-feedback">
                                             <strong>{{ $errors->first('password') }}</strong>
                                         </div>
                                     @endif
-                                    @include('layouts.spinner')
 
                                 </div>
                             </div>
@@ -136,12 +138,12 @@
                                             required
                                             id="repassword"
                                     >
-                                    @if ($errors->has('password_confirmation'))
+                                    @include('layouts.spinner')
+                                @if ($errors->has('password_confirmation'))
                                         <div class="invalid-feedback">
                                             <strong>{{ $errors->first('password_confirmation') }}</strong>
                                         </div>
                                     @endif
-                                    @include('layouts.spinner')
 
                                 </div>
                             </div>
