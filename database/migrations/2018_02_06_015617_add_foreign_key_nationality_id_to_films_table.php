@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDurationToFilmsTable extends Migration
+class AddForeignKeyNationalityIdToFilmsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddDurationToFilmsTable extends Migration
     public function up()
     {
         Schema::table('films', function (Blueprint $table) {
-            $table->string('duration')->after("date");
+            $table->integer('nationality_id')->unsigned();
+            $table->foreign('nationality_id')->references('id')->on('nationalities');
         });
     }
 
@@ -26,7 +27,8 @@ class AddDurationToFilmsTable extends Migration
     public function down()
     {
         Schema::table('films', function (Blueprint $table) {
-            $table->dropColumn("duration");
+            $table->dropForeign('films_nationality_id_foreign');
+            $table->dropColumn('nationality_id');
         });
     }
 }
