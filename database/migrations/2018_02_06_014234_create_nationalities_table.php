@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSynopsisInFilmsTable extends Migration
+class CreateNationalitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateSynopsisInFilmsTable extends Migration
      */
     public function up()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->string('synopsis')->after('name');
+        Schema::create('nationalities', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->unique();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class CreateSynopsisInFilmsTable extends Migration
      */
     public function down()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->dropColumn('synopsis');
-        });
+        Schema::dropIfExists('nationalities');
     }
 }

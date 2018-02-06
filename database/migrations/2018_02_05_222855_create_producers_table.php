@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddNulleableToDateInFilmsTable extends Migration
+class CreateProducersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddNulleableToDateInFilmsTable extends Migration
      */
     public function up()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->date('date')->nullable()->change();
-
+        Schema::create('producers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +27,6 @@ class AddNulleableToDateInFilmsTable extends Migration
      */
     public function down()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->date('date')->nullable(false)->change();
-
-        });
+        Schema::dropIfExists('producers');
     }
 }

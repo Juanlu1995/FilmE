@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCountryToFilmsTable extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddCountryToFilmsTable extends Migration
      */
     public function up()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->string('country')->after("views_counted");
+        Schema::create('views', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('film_id');
+            $table->integer('user_id')->nullable();
+            $table->integer('ip');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddCountryToFilmsTable extends Migration
      */
     public function down()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->dropColumn("country");
-        });
+        Schema::dropIfExists('views');
     }
 }

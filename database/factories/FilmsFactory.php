@@ -5,35 +5,7 @@ use Carbon\Carbon;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(\App\Film::class, function (Faker $faker) {
-    $categorías = [
-        "acción‎",
-        "animación‎",
-        "artes marciales‎",
-        "aventuras",
-        "basadas en hechos reales‎",
-        "ciencia ficción‎",
-        "cine negro‎",
-        "cómica",
-        "documental‎",
-        "drama",
-        "eróticas‎",
-        "fantásticas‎",
-        "gore",
-        "guerra‎",
-        "infantiles‎",
-        "intriga‎",
-        "LGBT‎",
-        "misterio‎",
-        "musicales‎",
-        "propaganda‎",
-        "adolescentes‎",
-        "policíacas‎",
-        "movies‎",
-        "románticas‎",
-        "satíricas‎",
-        "terror‎",
-        "Wéstern‎",
-    ];
+
     $time1 = Carbon::createFromTimestamp($faker->dateTimeThisDecade()->getTimestamp());
     $time2 = Carbon::createFromTimestamp($faker->dateTimeThisDecade()->getTimestamp());
 
@@ -43,14 +15,9 @@ $factory->define(\App\Film::class, function (Faker $faker) {
         'cover' => 'http://lorempixel.com/800/600/',
         'date' => Carbon::createFromTimestamp($faker->dateTimeBetween("-193 years", Carbon::now()->getTimestamp())->getTimestamp())->toDateString(),
         'duration' => $faker->numberBetween(20,390),
-        'category' => $faker->randomElement($categorías),
         'rating' => $faker->numberBetween(0,100),
-        'actors' => $faker->name,
-        'directors' => $faker->name,
-        'producer' => $faker->company,
         'reviews_counted' => 0,
         'views_counted' => 0,
-        'country' => $faker->country,
         'created_at'=> ($time1 < $time2) ? $time1 : $time2,
         'updated_at'=> ($time1 > $time2) ? $time1 : $time2
     ];

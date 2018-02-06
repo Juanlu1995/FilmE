@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddProducerToFilmsTable extends Migration
+class CreateCategorysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddProducerToFilmsTable extends Migration
      */
     public function up()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->string('producer')->after("directors");
-
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->text('description');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +28,6 @@ class AddProducerToFilmsTable extends Migration
      */
     public function down()
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->dropColumn("producer");
-        });
+        Schema::dropIfExists('categories');
     }
 }
