@@ -17,7 +17,7 @@ class CreateViewsTable extends Migration
             $table->increments('id');
             $table->integer('film_id')->unsigned();
             $table->integer('user_id')->unsigned()->nullable();
-            $table->integer('ip');
+            $table->bigInteger('ip');
             $table->timestamps();
 
             $table->foreign('film_id')->references('id')->on('films');

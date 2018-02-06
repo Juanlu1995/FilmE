@@ -28,11 +28,15 @@ class DatabaseSeeder extends Seeder {
                 $films = factory(\App\Film::class, 2)->create(['user_id' => $user->id, 'nationality_id' => $nationality->id]);
 
                 $films->each(function (\App\Film $film) use ($user, $categories, $producers, $contributes) {
-                    $reviews = factory(\App\Review::class, 2)->create([
+                    factory(\App\Review::class, 2)->create([
                         'user_id' => $user->id,
                         'film_id' => $film->id,
                     ]);
 
+                    factory(\App\View::class, rand(2,10))->create([
+                        'film_id' => $film->id,
+                        'user_id' => $user->id
+                    ]);
 
                     $film->categories()->sync($categories->random(3));
                     $film->actors()->sync($contributes->random(10));
