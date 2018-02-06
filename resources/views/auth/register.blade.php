@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('scripts')
-    <script src="js/validateLogin.js"></script>
+    <script src="js/validateRegister.js"></script>
 @endpush
 
 @section('content')

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="justify-content-center">
+    <div class="offset-md-3">
         {{ $films->links("pagination::bootstrap-4") }}
     </div>
     @forelse($films as $film)
