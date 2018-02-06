@@ -8,6 +8,10 @@ class Review extends Model {
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function film() {
-        return $this->belongsToMany(Film::class);
+        return $this->belongsTo(Film::class);
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class);
     }
 }

@@ -21,6 +21,10 @@ class CreateReviewsTable extends Migration
             $table->text('content');
             $table->tinyInteger('rating');
             $table->timestamps();
+
+            $table->foreign('film_id')->references('id')->on('films');
+            $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder {
         $categories = factory(\App\Category::class, 10)->create();
 
         $nationalities->each(function (App\Nationality $nationality) use ($nationalities, $users, $categories, $producers) {
-            $contributes = factory(\App\Contribute::class, 10)->create([
+            $contributes = factory(\App\Contribute::class, 20)->create([
                 "nationality_id" => $nationality->id,
             ]);
 
@@ -33,10 +33,10 @@ class DatabaseSeeder extends Seeder {
                         'film_id' => $film->id,
                     ]);
 
+
                     $film->categories()->sync($categories->random(3));
                     $film->actors()->sync($contributes->random(10));
                     $film->directors()->sync($contributes->random(2));
-                    $film->reviews()->sync($reviews);
                     $film->producers()->sync($producers->random(1));
                 });
             });

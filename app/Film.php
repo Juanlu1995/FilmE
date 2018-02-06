@@ -32,7 +32,7 @@ class Film extends Model {
     }
 
     public function reviews() {
-        return $this->belongsToMany(View::class);
+        return $this->hasMany(Review::class);
     }
 
     public function views() {

@@ -28,7 +28,7 @@ class AddForeignKeyNationalityIdToContributesTable extends Migration
     {
         Schema::table('contributes', function (Blueprint $table) {
             $table->dropForeign('contributes_nationality_id_foreign');
-            $table->dropColumn('nationalty_id');
+            $table->dropColumn('nationality_id');
         });
     }
 }

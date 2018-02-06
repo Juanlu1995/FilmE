@@ -15,10 +15,13 @@ class CreateViewsTable extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('film_id');
-            $table->integer('user_id')->nullable();
+            $table->integer('film_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->integer('ip');
             $table->timestamps();
+
+            $table->foreign('film_id')->references('id')->on('films');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
