@@ -16,8 +16,6 @@ $factory->define(\App\Film::class, function (Faker $faker) {
         'date' => Carbon::createFromTimestamp($faker->dateTimeBetween("-193 years", Carbon::now()->getTimestamp())->getTimestamp())->toDateString(),
         'duration' => $faker->numberBetween(20,390),
         'rating' => $faker->numberBetween(0,100),
-        'reviews_counted' => 0,
-        'views_counted' => 0,
         'created_at'=> ($time1 < $time2) ? $time1 : $time2,
         'updated_at'=> ($time1 > $time2) ? $time1 : $time2
     ];

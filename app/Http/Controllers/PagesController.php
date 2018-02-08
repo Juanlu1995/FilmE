@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Film;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class PagesController extends Controller
 {
@@ -83,5 +84,14 @@ class PagesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function giveMeFilms(){
+        if (request()->ajax()){
+            $films = Film::orderBy('created_at', 'desc')->paginate(15);
+            return View::make('films.listFilms', array('films' => $films))->render();
+        }else{
+            return redirect('/');
+        }
     }
 }

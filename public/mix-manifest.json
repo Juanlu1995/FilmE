@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/validateRegister.js": "/js/validateRegister.js",
+    "/js/paginateIndex.js": "/js/paginateIndex.js",
     "/css/all.css": "/css/all.css"
 }

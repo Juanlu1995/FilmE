@@ -21,8 +21,6 @@ class CreateFilmsTable extends Migration
             $table->date('date')->nullable();
             $table->string('duration');
             $table->integer("rating");
-            $table->integer("reviews_counted")->nullable();
-            $table->integer("views_counted")->nullable();
             $table->timestamps();
         });
     }

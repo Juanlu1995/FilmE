@@ -21,6 +21,8 @@ Route::get('/films/show/{film}', 'FilmsController@show');
 Route::get('/users/{username}', 'UsersController@show');
 Route::get('/profile','UsersController@profile')->middleware("auth");
 
+Route::get('/givemefilms/','PagesController@giveMeFilms');
+
 
 Route::post('/register/validate','Auth\RegisterController@validateAJAX')->middleware('guest');
 Auth::routes();
