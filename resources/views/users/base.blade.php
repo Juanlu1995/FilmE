@@ -17,6 +17,7 @@
                     </small>
                 </h5>
             </div>
+
             <div class="row">
 
                 <h5>
@@ -29,18 +30,8 @@
                 </h5>
             </div>
 
-            {{--@todo colocal las películas que le han gustado al usuario--}}
-            <div class="row">
 
-                <h5>
-                    <span class="text-warning">
-                        Liked films:
-                    </span>
-                    <small>
-                        Aquí se pondrán las películas a las cuales le ha gustado al usuario
-                    </small>
-                </h5>
-            </div>
+            {{--TODO carrousel reviews--}}
 
         </div>
     </div>

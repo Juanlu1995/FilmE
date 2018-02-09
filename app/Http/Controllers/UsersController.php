@@ -43,7 +43,10 @@ class UsersController extends Controller {
      */
     public function show($username) {
         $user = User::where('username', $username)->first();
-        return view('users.show', ['user' => $user]);
+
+        $reviews = $user->reviews;
+
+        return view('users.show', ['user' => $user, 'reviews' => $reviews]);
     }
 
 
@@ -53,10 +56,11 @@ class UsersController extends Controller {
      * @param  User user
      * @return \Illuminate\Http\Response
      */
-    public function profile() {
-        $user = Auth::user();
+    public function profile(Request $request) {
+        $user = $request->user();
+        $reviews = $user->reviews;
 
-        return view('users.profile', ['user' => $user]);
+        return view('users.profile', ['user' => $user, 'reviews' => $reviews]);
     }
 
 

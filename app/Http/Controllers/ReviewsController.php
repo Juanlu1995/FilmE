@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Film;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
-class PagesController extends Controller
+class ReviewsController extends UsersController
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $films = Film::withCount('views')->orderBy('views_count', 'desc')->paginate(10);
-        return view('home', ['films' => $films]);
+        //todo ultimas reviews
     }
 
     /**
@@ -48,7 +46,7 @@ class PagesController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -85,12 +83,12 @@ class PagesController extends Controller
         //
     }
 
-    public function giveMeFilms(){
-        if (request()->ajax()){
-            $films = Film::withCount('views')->orderBy('views_count', 'desc')->paginate(10);
-            return View::make('films.listFilms', array('films' => $films))->render();
-        }else{
-            return redirect('/');
-        }
+
+    public function showUserReviews($username){
+        $user = User::where('username', $username)->first();
+
+        $reviews = $user->reviews;
+
+        return view('reviews.showUserReviews',['user' => $user, 'reviews' => $reviews]);
     }
 }

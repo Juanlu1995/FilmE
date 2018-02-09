@@ -24,7 +24,7 @@
 <body>
 <div id="app">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark header mb-3">
         <div class="container">
             <div class="navbar-header">
 
@@ -47,7 +47,6 @@
 
                     <ul class="navbar-nav mr-auto">
                         &nbsp;
-                        {{--@todo bloquear a usuarios no logueados--}}
 
                         <li class="nav-item">
                             {{--@todo arreglar active span--}}

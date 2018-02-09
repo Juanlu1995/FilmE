@@ -32,7 +32,7 @@ class User extends Authenticatable
     }
 
 
-    public function users(){
+    public function reviews(){
         return $this->hasMany(Review::class);
     }
 

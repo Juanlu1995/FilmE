@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        @todo ¿para qué sirve este controlador?
-        return view('home', ['films' => Film::orderBy('created_at','dec')->paginate(15)]);
+        
     }
 }

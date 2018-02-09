@@ -28,22 +28,19 @@ class FilmsController extends Controller {
         $vacio = "Empty";
 
         Film::create([
+            'user_id' => $request->user()->id,
             'name' => $request->input('name'),
             'synopsis' => $request->input('synopsis') ?: $vacio,
-            'cover' => $request->input('cover')?: "http://lorempixel.com/800/600/",
+            'cover' => $request->input('cover') ?: "http://lorempixel.com/800/600/",
             'date' => $request->input('date'),
-            'duration' => $request->input('duration')?: "0",
-            'category' => $request->input('category')?: "Unassigned",
-            'rating' => $request->input('rating')?: "0",
-            'actors' => $request->input('actors')?: $vacio,
-            'directors' => $request->input('directors')?: $vacio,
-            'producer' => $request->input('producer')?: $vacio,
-//            'reviews_counted'=> $request->input('reviews_counted'),
-//            'views_counted'=> $request->input('views_counted'),
-            'country' => $request->input('country')?: $vacio,
+            'duration' => $request->input('duration') ?: "0",
+            //todo Implementar category, directores, productores y actores.
+            'rating' => $request->input('rating') ?: "0",
+            //todo Que la nacionalidad, si no existe una real, sea el valor 1 = none;
+            'nationality_id' => $request->input('country') ?: 1,
 
         ]);
-        return redirect('/');
+        return redirect('/films/show/'.Film::latest()->first()->id);
     }
 
     /**
@@ -54,7 +51,7 @@ class FilmsController extends Controller {
      */
     public function show(Film $film) {
 
-        return view('films.show',[
+        return view('films.show', [
             "film" => $film
         ]);
     }

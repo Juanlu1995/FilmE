@@ -46,4 +46,11 @@ class Film extends Model {
     public function country(){
         return $this->belongsTo(Nationality::class);
     }
+
+    public function getViewsCount(){
+        return $this->views()->count();
+    }
+    public function getReviewsCount(){
+        return $this->reviews()->count();
+    }
 }
