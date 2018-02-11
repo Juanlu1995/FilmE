@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Film;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -84,10 +85,17 @@ class ReviewsController extends UsersController
     }
 
 
+    public function showFilmReviews(Film $film){
+        $reviews = $film->reviews()->paginate(9);
+
+        return view('reviews.showFilmReviews',['film' => $film, 'reviews' => $reviews]);
+    }
+
+
     public function showUserReviews($username){
         $user = User::where('username', $username)->first();
 
-        $reviews = $user->reviews;
+        $reviews = $user->reviews()->paginate(9);
 
         return view('reviews.showUserReviews',['user' => $user, 'reviews' => $reviews]);
     }

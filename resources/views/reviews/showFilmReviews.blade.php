@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="offset-5">
-        {{$reviews->links("pagination::bootstrap-4")}}
-    </div>
 
     <div class="row">
-        <h1 class="display-4">{{$user->name}} {{$user->last_name}}
-            <small class="text-muted">{{$user->username}}</small>
+        <h1 class="display-4">{{$film->name}}
+            <small class="text-muted">Rating: {{$film->rating}}</small>
         </h1>
+
     </div>
     <div class="content">
         @include('reviews.reviews')
@@ -16,6 +14,7 @@
             {{$reviews->links("pagination::bootstrap-4")}}
         </div>
     </div>
+
     <div class="offset-5">
         {{$reviews->links("pagination::bootstrap-4")}}
     </div>

@@ -1,14 +1,19 @@
 @forelse($films as $film)
     <div class="row py-5 border-bottom">
         <div class="col-md-4">
-            <a href="/films/show/{{ $film['id'] }}">
-                <img src="{{$film['cover']}}" alt="{{$film['name']}} cover" class="img-fluid img-thumbnail">
-            </a>
+            <div class="imagebox border border-dark">
+                <a href="/films/show/{{ $film['id'] }}">
+                    <img src="{{$film['cover']}}" alt="{{$film['name']}} cover" class="img-fluid">
+                    <span class="imagebox-desc">{{$film->name}}</span>
+                </a>
+            </div>
         </div>
         <div class="col-md-8">
             <div class="row">
                 <div class="row">
-                    <h1 class="display-4 col">{{ $film['name'] }}</h1>
+                    <a href="/films/show/{{ $film['id'] }}">
+                        <h1 class="display-4 col">{{ $film['name'] }}</h1>
+                    </a>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
@@ -22,15 +27,15 @@
                                 <a href="/users/{{$film->user->username}}">{{ $film->user->name }}</a>
                             </b>
                         </div>
-{{--TODO enlace a las reviews de una película--}}
+                        {{--TODO enlace a las reviews de una película--}}
                         <div class="row offset-1">
-                            <b>Reviews: <span class="text-primary">{{$film->getReviewsCount()}}</span></b>
+                            <b>Reviews: <a href="/reviews/show/film/{{$film->id}}">{{$film->getReviewsCount()}}</a></b>
                         </div>
                         <div class="row offset-1">
                             <b>Views: <span class="text-success">{{$film->getViewsCount()}}</span></b>
                         </div>
                     </div>
-                    <div class="col-md-6 mx-2">{{ $film['synopsis'] }}</div>
+                    <div class="col-md-6 mx-2"><p class="text-justify">{{ $film['synopsis'] }}</p></div>
                 </div>
             </div>
         </div>

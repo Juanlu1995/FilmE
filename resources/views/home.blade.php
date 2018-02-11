@@ -5,10 +5,12 @@
 @endpush
 
 @section('content')
-    <div class="offset-md-3">
-        {{ $films->links("pagination::bootstrap-4") }}
-    </div>
+
     <div class="content">
         @include('films.listFilms')
+    </div>
+
+    <div class="offset-md-3 my-3">
+        {{ $films->links("pagination::bootstrap-4") }}
     </div>
 @endsection

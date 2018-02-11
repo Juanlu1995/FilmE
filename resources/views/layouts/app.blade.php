@@ -24,7 +24,7 @@
 <body>
 <div id="app">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark header mb-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark header mb-3 ">
         <div class="container">
             <div class="navbar-header">
 
@@ -50,18 +50,13 @@
 
                         <li class="nav-item">
                             {{--@todo arreglar active span--}}
-                            <a class="nav-link" href="/films/discover">Discover @if(Request::is("/films/discover"))<span
-                                        class="sr-only">(current)</span>@endif</a>
+                            <a class="nav-link @if(Request::is("films/discover")) active @endif" href="/films/discover">Discover</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/profile">Profile @if(Request::is("/profile"))<span
-                                        class="sr-only">(current)</span>@endif
-                            </a>
+                            <a class="nav-link @if(Request::is("profile")) active @endif" href="/profile">Profile</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/films/create">Create @if(Request::is("/films/create"))<span
-                                        class="sr-only">(current)</span>@endif
-                            </a>
+                        <li class="nav-item @if(Request::is("films/create")) active @endif">
+                            <a class="nav-link" href="/films/create">Create</a>
                         </li>
                     </ul>
             @endauth

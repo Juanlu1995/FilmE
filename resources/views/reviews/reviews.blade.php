@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h3 class="card-header">{{$review->film->name}}</h3>
                     <h5 class="card-title"></h5>
-                    <p class="card-text">{{ mb_strimwidth($review->content, 0, 100, "...") }}</p>
+                    <p class="card-text">{{ mb_strimwidth($review->content, 0, 180, "...") }}</p>
                 </div>
                 <div class="card-footer">
                     <h4 class="text-muted">Rating: <b>{{$review->rating}}</b></h4>

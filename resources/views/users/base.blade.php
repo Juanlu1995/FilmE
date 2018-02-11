@@ -30,9 +30,12 @@
                 </h5>
             </div>
 
-
             {{--TODO carrousel reviews--}}
-
+            <div class="row">
+                <h5>
+                    <a href="/reviews/show/{{$user->username}}">Reviews</a>
+                </h5>
+            </div>
         </div>
     </div>
 </div>

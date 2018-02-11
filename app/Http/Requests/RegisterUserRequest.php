@@ -30,7 +30,6 @@ class RegisterUserRequest extends FormRequest {
         return $rules;
     }
 
-//    @todo mensajes personalizados
 
     public function messages() {
         $messagesName = $this->messagesName();
