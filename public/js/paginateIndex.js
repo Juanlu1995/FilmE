@@ -60,12 +60,60 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 48);
+/******/ 	return __webpack_require__(__webpack_require__.s = 173);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 2:
+/***/ 173:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(174);
+
+
+/***/ }),
+
+/***/ 174:
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__(6);
+
+function getDataPaginate() {
+    event.preventDefault();
+
+    var target = $(event.target);
+    var value = parseInt(target.text());
+    var parent = target.parent();
+
+    var before = $(".page-item.active span.page-link");
+    var beforeVal = before.text();
+    var beforeParent = before.parent();
+
+    beforeParent.html("<a href=\"http://filme.test?page=" + beforeVal + "\" class=\"page-link\">" + beforeVal + "</a>");
+    beforeParent.removeClass("active");
+
+    parent.addClass("active");
+    parent.html("<span class=\"page-link\">" + value + "</span>");
+
+    axios.get('/givemefilms?page=' + value).then(function (response) {
+        $(".content").html(response.data);
+        attachAsyncTask();
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function attachAsyncTask() {
+    $("a.page-link").on('click', getDataPaginate);
+}
+
+$(function () {
+    attachAsyncTask();
+});
+
+/***/ }),
+
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10434,54 +10482,6 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-
-/***/ }),
-
-/***/ 48:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(49);
-
-
-/***/ }),
-
-/***/ 49:
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__(2);
-
-function getDataPaginate() {
-    event.preventDefault();
-
-    var target = $(event.target);
-    var value = parseInt(target.text());
-    var parent = target.parent();
-
-    var before = $(".page-item.active span.page-link");
-    var beforeVal = before.text();
-    var beforeParent = before.parent();
-
-    beforeParent.html("<a href=\"http://filme.test?page=" + beforeVal + "\" class=\"page-link\">" + beforeVal + "</a>");
-    beforeParent.removeClass("active");
-
-    parent.addClass("active");
-    parent.html("<span class=\"page-link\">" + value + "</span>");
-
-    axios.get('/givemefilms?page=' + value).then(function (response) {
-        $(".content").html(response.data);
-        attachAsyncTask();
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
-function attachAsyncTask() {
-    $("a.page-link").on('click', getDataPaginate);
-}
-
-$(function () {
-    attachAsyncTask();
-});
 
 /***/ })
 

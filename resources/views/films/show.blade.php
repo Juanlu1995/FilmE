@@ -1,7 +1,12 @@
 @extends("layouts.app")
 
+@push('scripts')
+    <script src="{{asset("js/filmGraph.js")}}"></script>
+@endpush
+
 @section('content')
     <div class="row">
+        <input type="hidden" name="filmId" id="filmId" value="{{$film->id}}">
         <div class="col-md-4 my-3">
             <img class="img-fluid" src="{{ $film['cover'] }}"/>
         </div>
@@ -27,4 +32,8 @@
             <h4>{{$film['synopsis']}}</h4>
         </div>
     </div>
+
+    <canvas class="filmGraph" width="400" height="400"></canvas>
+
+
 @endsection
