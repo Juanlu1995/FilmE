@@ -71,7 +71,6 @@ function chargeGraph(fechas) {
         options: chartOptions
     });
     
-    console.log(myChart)
 }
 
 
