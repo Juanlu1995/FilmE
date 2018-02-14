@@ -1,7 +1,7 @@
 @extends("layouts.app")
 
 @push('scripts')
-    <script src="{{asset("js/filmGraph.js")}}"></script>
+    <script src="{{asset("js/filmGraph.js")}}" defer></script>
 @endpush
 
 @section('content')
@@ -32,8 +32,8 @@
             <h4>{{$film['synopsis']}}</h4>
         </div>
     </div>
-
-    <canvas class="filmGraph" width="400" height="400"></canvas>
-
+    <div class="row my-5" >
+        <canvas width="400" id="filmGraph" height="110"></canvas>
+    </div>
 
 @endsection
