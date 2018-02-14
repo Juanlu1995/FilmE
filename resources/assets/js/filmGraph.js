@@ -4,15 +4,20 @@ const moment = require('moment');
 
 function chargeGraph(fechas) {
 
-    let ctx = document.getElementById("filmGraph");
+    // TODO mejorar gráfica
 
+    const ctx = document.getElementById("filmGraph");
 
-    let dates = fechas.map(x => moment(x));
+    const dates = fechas.map(x => moment(x).year());
+
+    let labels = [];
+
+    labels = labels.concat(dates);
 
     let dataChart = {
-        labels: dates.map(x => x._i),
+        labels: labels,
         datasets: [{
-            label: "Date views",
+            label: "Date view",
             data: dates,
             lineTension: 0,
             fill: false,
@@ -47,8 +52,9 @@ function chargeGraph(fechas) {
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: "Time the film is viewed",
-                    fontColor: "red"
+                    labelString: "VIEWS",
+                    fontColor: "#BF532F",
+                    fontSize: 40,
                 }
             }],
             yAxes: [{
@@ -58,26 +64,29 @@ function chargeGraph(fechas) {
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: "Views",
-                    fontColor: "green"
+                    labelString: "TIME",
+                    fontColor: "#2AB283",
+                    fontSize: 40,
                 }
             }]
         }
     };
+
 
     let myChart = new Chart(ctx, {
         type: 'line',
         data: dataChart,
         options: chartOptions
     });
-    
+
 }
 
 
 $(function () {
+
     axios.get('/views/film?id=' + document.getElementById('filmId').value)
         .then(function ($response) {
-            let data = $response.data;
+            const data = $response.data;
             let fechas = [];
             data.map(x => fechas.push(x.created_at));
             fechas.sort((a, b) => new Date(a) - new Date(b));
@@ -85,5 +94,6 @@ $(function () {
         }).catch(function (error) {
         console.log(error)
     });
+
 });
 
