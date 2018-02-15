@@ -15,27 +15,33 @@
                         <h1 class="display-4 col">{{ $film['name'] }}</h1>
                     </a>
                 </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="row offset-1">
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <div class="row ml-1">
                             <h3 class="display-5 text-danger">Rating: {{ $film['rating'] }}</h3>
                         </div>
 
-                        <div class="row offset-1">
+                        <div class="row ml-1">
 
                             <b> Author:
                                 <a href="/users/{{$film->user->username}}">{{ $film->user->name }}</a>
                             </b>
                         </div>
                         {{--TODO enlace a las reviews de una película--}}
-                        <div class="row offset-1">
+                        <div class="row ml-1">
                             <b>Reviews: <a href="/reviews/show/film/{{$film->id}}">{{$film->getReviewsCount()}}</a></b>
                         </div>
-                        <div class="row offset-1">
+                        <div class="row ml-1">
                             <b>Views: <span class="text-success">{{$film->getViewsCount()}}</span></b>
                         </div>
                     </div>
-                    <div class="col-md-6 mx-2"><p class="text-justify">{{ $film['synopsis'] }}</p></div>
+                    <div class="col-md-8">
+                        <div class="row border-bottom">
+                            <h3 class="text-danger">Synopsis</h3>
+                        </div>
+                        <div class="row mt-3">
+                            <p class="text-justify">{{ $film['synopsis'] }}</p></div>
+                    </div>
                 </div>
             </div>
         </div>
