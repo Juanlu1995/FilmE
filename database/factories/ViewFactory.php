@@ -10,7 +10,7 @@ $factory->define(App\View::class, function (Faker $faker) {
     $time2 = Carbon::createFromTimestamp($faker->dateTimeThisDecade()->getTimestamp());
 
     return [
-        'ip' => DB::raw('INET_ATON('.'"'.$faker->ipv4.'"'.')'),
+        'ip' => $faker->boolean ? $faker->ipv4 : $faker->ipv6,
         'created_at'=> ($time1 < $time2) ? $time1 : $time2,
         'updated_at'=> ($time1 > $time2) ? $time1 : $time2
     ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Film;
 use App\Http\Requests\CreateFilmRequest;
+use App\View;
 use Illuminate\Http\Request;
 
 class FilmsController extends Controller {
@@ -40,7 +41,7 @@ class FilmsController extends Controller {
             'nationality_id' => $request->input('country') ?: 1,
 
         ]);
-        return redirect('/films/show/'.Film::latest()->first()->id);
+        return redirect('/films/show/' . Film::latest()->first()->id);
     }
 
     /**
@@ -49,7 +50,16 @@ class FilmsController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Film $film) {
+    public function show(Film $film, Request $request) {
+
+
+        if ($film) {
+            View::create([
+                'film_id' => $film->id,
+                'user_id' => $request->user() ? $request->user()->id : null,
+                'ip' => $request->ip(),
+                ]);
+        }
 
         return view('films.show', [
             "film" => $film
