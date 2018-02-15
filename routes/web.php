@@ -22,6 +22,10 @@ Route::get('/films/show/{film}', 'FilmsController@show');
 Route::get('/users/{username}', 'UsersController@show');
 Route::get('/profile','UsersController@profile')->middleware("auth");
 
+//Ruta contributes
+Route::get('/contributes/', 'ContributesController@index');
+Route::get('/contributes/show/{slug}','ContributesController@show');
+
 //Ruta AJAX paginacion de palículas
 Route::get('/givemefilms/','PagesController@giveMeFilms'); //AJAX
 

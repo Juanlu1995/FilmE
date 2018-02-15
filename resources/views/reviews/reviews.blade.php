@@ -9,7 +9,6 @@
                     <img src="{{$review->film->cover}}" alt="{{$review->film->name}} cover" class="img-fluid">
                     <span class="imagebox-desc">{{$review->film->name}}</span>
                 </div>
-                <img class="card-img-top" src="{{$review->film->cover}}" alt="{{$review->film->name}}">
                 <div class="card-body">
                     <h3 class="card-header">{{$review->title}}</h3>
                     <h5 class="card-title"></h5>

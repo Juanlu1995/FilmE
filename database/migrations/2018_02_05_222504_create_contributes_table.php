@@ -18,6 +18,7 @@ class CreateContributesTable extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('slug');
+            $table->string('photo');
             $table->date('birth_date');
             $table->timestamps();
         });
