@@ -12,7 +12,7 @@ $factory->define(\App\Film::class, function (Faker $faker) {
     return [
         'name' => $faker->unique()->name,
         'synopsis' => $faker->text(400),
-        'cover' => 'http://lorempixel.com/800/600/',
+        'cover' => 'https://loremflickr.com/800/600/',
         'date' => Carbon::createFromTimestamp($faker->dateTimeBetween("-193 years", Carbon::now()->getTimestamp())->getTimestamp())->toDateString(),
         'duration' => $faker->numberBetween(20,390),
         'rating' => $faker->numberBetween(0,100),

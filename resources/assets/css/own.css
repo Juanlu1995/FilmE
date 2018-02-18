@@ -35,3 +35,9 @@ Texto como footer en una imagen.
 .imagebox:hover .imagebox-desc {
     padding-bottom: 10%;
 }
+
+
+
+#filmCarousel{
+    width: 30%;
+}
