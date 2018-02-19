@@ -3,7 +3,7 @@
         <div class="col-md-4">
             <div class="imagebox border border-dark">
                 <a href="/films/show/{{ $film['id'] }}">
-                    <img src="{{$film['cover']}}" alt="{{$film['name']}} cover" class="img-fluid">
+                    <img src="{{$film['cover']}}" alt="{{$film['name']}} cover" class="lozad img-fluid" data-src="{{$film['cover']}}">
                     <span class="imagebox-desc">{{$film->name}}</span>
                 </a>
             </div>
@@ -18,7 +18,7 @@
                 <div class="row mt-3">
                     <div class="col-md-3">
                         <div class="row ml-1">
-                            <h3 class="display-5 text-danger">Rating: {{ $film['rating'] }}</h3>
+                            <h3 class="text-danger">Rating: {{ $film['rating'] }}</h3>
                         </div>
 
                         <div class="row ml-1">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="row border-bottom">
-                            <h3 class="text-danger">Synopsis</h3>
+                            <h3 class="text-success">Synopsis</h3>
                         </div>
                         <div class="row mt-3">
                             <p class="text-justify">{{ $film['synopsis'] }}</p></div>

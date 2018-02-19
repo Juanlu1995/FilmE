@@ -14,18 +14,18 @@
             </a>
         </div>
         <div class="row ml-1">
-            <h3 class="display-5">Birth date:
+            <h3 class="">Birth date:
                 <span class="text-danger">{{ $contribute['birth_date'] }}</span>
                 <small class="text-muted">({{$contribute->getAge()}} years)</small>
             </h3>
         </div>
         <div class="row ml-1">
-            <h3 class="display-5">Nationality:
+            <h3 class="">Nationality:
                 <span class="text-danger">{{$contribute->nationality->name}}</span>
             </h3>
         </div>
         <div class="row ml-1">
-            <h3 class="display-5">Contributions: <span class="text-danger">{{$contribute->numberOfContributions()}}</span></h3>
+            <h3 class="">Contributions: <span class="text-danger">{{$contribute->numberOfContributions()}}</span></h3>
         </div>
     </div>
 </div>

@@ -49,7 +49,6 @@
                         &nbsp;
 
                         <li class="nav-item">
-                            {{--@todo arreglar active span--}}
                             <a class="nav-link @if(Request::is("films/discover")) active @endif" href="/films/discover">Discover</a>
                         </li>
                         <li class="nav-item">
@@ -92,7 +91,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container mt-4">
         @yield('content')
     </div>
 </div>

@@ -30,7 +30,8 @@ Route::get('/contributes/show/{slug}','ContributesController@show');
 Route::get('/givemefilms/','PagesController@giveMeFilms'); //AJAX
 
 //Rutas reviews
-Route::get('/reviews/show/{username}/','ReviewsController@showUserReviews');
+Route::get('/reviews/show/{review}/','ReviewsController@show');
+Route::get('/reviews/show/user/{username}/','ReviewsController@showUserReviews');
 Route::get('/reviews/show/film/{film}/','ReviewsController@showFilmReviews');
 
 //Ruta AJAX para gráfica de visitas de una película
