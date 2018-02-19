@@ -6,8 +6,10 @@
 
             <div class="card">
                 <div class="imagebox border border-dark">
-                    <img src="{{$review->film->cover}}" alt="{{$review->film->name}} cover" class="img-fluid">
-                    <span class="imagebox-desc">{{$review->film->name}}</span>
+                    <a href="/reviews/show/{{$review->id}}">
+                        <img src="{{$review->film->cover}}" alt="{{$review->film->name}} cover" class="img-fluid">
+                        <span class="imagebox-desc">{{$review->film->name}}</span>
+                    </a>
                 </div>
                 <div class="card-body">
                     <h3 class="card-header">{{$review->title}}</h3>

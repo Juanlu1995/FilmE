@@ -31,13 +31,13 @@
             </div>
 
             <div class="row border-bottom">
-                <h3 class="display-5 text-primary">Reviews:</h3>
+                <h3 class="text-primary">Reviews:</h3>
             </div>
             <carousel :per-page="3" :autoplay="true" pagination-color="#3CA4E3" :pagination-padding=6 class="my-3">
                 @foreach($user->reviews as $review)
                     <slide>
                         <div class="imagebox border border-dark">
-                            <a href="/reviews/show/film/{{$review->film->id}}">
+                            <a href="/reviews/show/{{$review->id}}">
                                 <img class="d-block w-100 imageCarousel" src="{{$review->film->cover}}" alt="First slide">
                                 <span class="imagebox-desc">{{$review->film->name}}</span>
                             </a>

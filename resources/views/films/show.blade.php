@@ -41,7 +41,7 @@
                 @foreach($film->reviews as $review)
                     <slide>
                         <div class="imagebox border border-dark">
-                            <a href="/reviews/show/film/{{$review->film->id}}">
+                            <a href="/reviews/show/{{$review->id}}">
                                 <img class="d-block w-100" src="{{$review->user->avatar}}" alt="First slide">
                                 <span class="imagebox-desc">{{$review->user->name}}</span>
                             </a>

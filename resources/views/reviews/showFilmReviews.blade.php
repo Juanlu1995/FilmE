@@ -9,7 +9,7 @@
 
     </div>
     <div class="content">
-        @include('reviews.reviews')
+        @include('reviews.reviewsList')
         <div class="offset-5">
             {{$reviews->links("pagination::bootstrap-4")}}
         </div>

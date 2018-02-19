@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Film;
+use App\Review;
 use App\User;
 use Illuminate\Http\Request;
 
-class ReviewsController extends UsersController
+class ReviewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,9 +46,9 @@ class ReviewsController extends UsersController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Review $review)
     {
-
+        return view('reviews.review',['review' => $review]);
     }
 
     /**

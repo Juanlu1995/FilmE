@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <h1 class="display-5">Create film</h1>
+    <h1 class="">Create film</h1>
     <form action="{{ url('/') }}/films/create" method="post">
         {{ csrf_field() }}
 
