@@ -28,11 +28,17 @@ class FilmsController extends Controller {
     public function store(CreateFilmRequest $request) {
         $vacio = "Empty";
 
+        if( $image = $request->file('cover') ){
+            $url = $image->store('cover','public');
+        }else{
+            $url = "https://picsum.photos/800/600/?".mt_rand(1,1000);
+        }
+
         Film::create([
             'user_id' => $request->user()->id,
             'name' => $request->input('name'),
             'synopsis' => $request->input('synopsis') ?: $vacio,
-            'cover' => $request->input('cover') ?: "http://lorempixel.com/800/600/",
+            'cover' => $url,
             'date' => $request->input('date'),
             'duration' => $request->input('duration') ?: "0",
             //todo Implementar category, directores, productores y actores.

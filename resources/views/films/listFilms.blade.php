@@ -3,7 +3,7 @@
         <div class="col-md-4">
             <div class="imagebox border border-dark">
                 <a href="/films/show/{{ $film['id'] }}">
-                    <img src="{{$film['cover']}}" alt="{{$film['name']}} cover" class="lozad img-fluid" data-src="{{$film['cover']}}">
+                    <img src="{{$film->cover}}" alt="{{$film['name']}} cover" class="lozad img-fluid" data-src="{{$film->cover}}">
                     <span class="imagebox-desc">{{$film->name}}</span>
                 </a>
             </div>
