@@ -43915,24 +43915,30 @@ var Chart = __webpack_require__(299);
 var moment = __webpack_require__(0);
 
 function chargeGraph(fechas) {
-
     // TODO mejorar gráfica
-
     var ctx = document.getElementById("filmGraph");
 
-    var dates = fechas.map(function (x) {
+    var views = fechas.map(function (x) {
         return moment(x).year();
+    });
+
+    var dates = Array.from(new Set(views));
+
+    var viewsCount = dates.map(function (fecha) {
+        return views.filter(function (x) {
+            return x === fecha;
+        }).length;
     });
 
     var labels = [];
 
-    labels = labels.concat(dates);
+    labels = labels.concat(Array.from(dates));
 
     var dataChart = {
         labels: labels,
         datasets: [{
             label: "Date view",
-            data: dates,
+            data: viewsCount,
             lineTension: 0,
             fill: false,
             borderColor: 'grey',
@@ -43985,7 +43991,7 @@ function chargeGraph(fechas) {
         }
     };
 
-    var myChart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'line',
         data: dataChart,
         options: chartOptions

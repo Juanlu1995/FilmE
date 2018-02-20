@@ -8,7 +8,7 @@
     <div class="row">
         <input type="hidden" name="filmId" id="filmId" value="{{$film->id}}">
         <div class="col-md-4 my-3">
-            <img class="img-fluid img-thumbnail" src="{{ $film['cover'] }}"/>
+            <img class="img-fluid img-thumbnail" src="{{ $film->cover }}"/>
         </div>
         <div class="col-md-8">
             <div class="row my-3">

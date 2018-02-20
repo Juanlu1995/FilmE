@@ -25,11 +25,22 @@
             <label for="synopsis">Synopsis</label>
             <textarea id="synopsis" name="synopsis" class="form-control" placeholder="Synopsis"></textarea>
         </div>
+
+
         <div class="form-group">
             <label for="cover">Cover</label>
-            <input type="text"
-                   name="cover" id="cover" class="form-control" placeholder="Cover">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="cover" name="cover">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose cover</label>
+                </div>
+            </div>
         </div>
+
+
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">

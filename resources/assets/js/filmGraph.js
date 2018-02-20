@@ -3,22 +3,26 @@ const Chart = require('chart.js');
 const moment = require('moment');
 
 function chargeGraph(fechas) {
-
-    // TODO mejorar gráfica
-
     const ctx = document.getElementById("filmGraph");
 
-    const dates = fechas.map(x => moment(x).year());
+    const views = fechas.map(x => moment(x).year());
+
+    const dates = Array.from(new Set(views));
+
+    const viewsCount = dates.map(fecha => views
+            .filter(x => x === fecha)
+            .length
+        );
 
     let labels = [];
 
-    labels = labels.concat(dates);
+    labels = labels.concat(Array.from(dates));
 
-    let dataChart = {
+    const dataChart = {
         labels: labels,
         datasets: [{
             label: "Date view",
-            data: dates,
+            data: viewsCount,
             lineTension: 0,
             fill: false,
             borderColor: 'grey',
@@ -35,7 +39,7 @@ function chargeGraph(fechas) {
     };
 
 
-    let chartOptions = {
+    const chartOptions = {
         legend: {
             display: true,
             position: 'top',
@@ -73,7 +77,7 @@ function chargeGraph(fechas) {
     };
 
 
-    let myChart = new Chart(ctx, {
+    new Chart(ctx, {
         type: 'line',
         data: dataChart,
         options: chartOptions
