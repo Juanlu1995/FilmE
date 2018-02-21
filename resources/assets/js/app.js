@@ -1,6 +1,3 @@
-const $ = require('jquery');
-
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -11,7 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import VueCarousel from 'vue-carousel';
+
+
+const $ = require('jquery');
+const jQuery = $;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -25,9 +25,11 @@ Vue.use(VueCarousel);
 const app = new Vue({
     el: '#app'
 });
+import VueCarousel from 'vue-carousel';
 
-let lozad = require('lozad');
 
+
+const lozad = require('lozad');
 
 const observer = lozad(); // lazy loads elements with default selector as '.lozad'
 observer.observe();

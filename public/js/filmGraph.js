@@ -43915,7 +43915,6 @@ var Chart = __webpack_require__(299);
 var moment = __webpack_require__(0);
 
 function chargeGraph(fechas) {
-    // TODO mejorar gráfica
     var ctx = document.getElementById("filmGraph");
 
     var views = fechas.map(function (x) {

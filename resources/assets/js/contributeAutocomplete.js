@@ -1,4 +1,3 @@
-const $ = require('jquery');
 
 
 function complete(target, data) {
@@ -11,6 +10,7 @@ $(function () {
     axios.get('/contributes/autocomplete')
         .then(function (response) {
             data = JSON.parse(response.data);
+            console.log(data);
         }).catch(function (e) {
         console.log(e)
     });
