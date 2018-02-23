@@ -60,37 +60,63 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 348);
+/******/ 	return __webpack_require__(__webpack_require__.s = 347);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 348:
+/***/ 347:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(349);
+module.exports = __webpack_require__(348);
 
 
 /***/ }),
 
-/***/ 349:
+/***/ 348:
 /***/ (function(module, exports) {
 
-
-
-function complete(target, data) {}
+function split(val) {
+    return val.split(/,\s*/);
+}
+function extractLast(term) {
+    return split(term).pop();
+}
 
 $(function () {
-    var data = void 0;
+    var contributes = void 0;
     axios.get('/contributes/autocomplete').then(function (response) {
-        data = JSON.parse(response.data);
-        console.log(data);
+        contributes = response.data;
+        console.log(contributes);
     }).catch(function (e) {
         console.log(e);
     });
 
-    $(".autoComplete").on('input', function (e, data) {
-        complete(e.target, data);
+    $(".autoComplete").on("keydown", function (event) {
+        if (event.keyCode === $.ui.keyCode.TAB && $(this).autocomplete("instance").menu.active) {
+            event.preventDefault();
+        }
+    }).autocomplete({
+        minLength: 0,
+        source: function source(request, response) {
+            // delegate back to autocomplete, but extract the last term
+            response($.ui.autocomplete.filter(contributes, extractLast(request.term)));
+        },
+        focus: function focus() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function select(event, ui) {
+            var terms = split(this.value);
+            // remove the current input
+            terms.pop();
+            // add the selected item
+            terms.push(ui.item.value);
+            // add placeholder to get the comma-and-space at the end
+            terms.push("");
+            this.value = terms.join(", ");
+            return false;
+        }
     });
 });
 

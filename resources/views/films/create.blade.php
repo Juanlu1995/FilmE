@@ -5,8 +5,7 @@
 @endsection
 
 @push('scripts')
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" defer></script>
+    <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{asset('js/contributeAutocomplete.js')}}" defer></script>
 @endpush
 @section('content')

@@ -81,15 +81,17 @@ class ContributesController extends Controller {
     }
 
 
-    public function autoCompleteAJAX(Request $request) {
+    public function autocompleteAJAX(Request $request) {
         if ($request->ajax()) {
 
+//            $contributes = Contribute::select('id','name','last_name');
             $contributes = Contribute::all();
+
 
             $contributesValues = [];
 
             foreach ($contributes as $contribute) {
-                array_push($contributesValues, [$contribute->id => $contribute->name . " " . $contribute->last_name]);
+                array_push($contributesValues, $contribute->name . " " . $contribute->last_name);
             }
 
 
