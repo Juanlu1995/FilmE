@@ -12,7 +12,7 @@
         </div>
         <div class="col-md-8">
             <div class="row my-3">
-                <h1>{{$film['name']}}</h1>
+                <h1 class="text-primary">{{$film['name']}}</h1>
             </div>
             <div class="col-md-4">
                 <h4>Date: {{ $film['date'] }}</h4>
@@ -22,8 +22,10 @@
                 <h2 class="text-danger">Rating: {{$film['rating']}}</h2>
             </div>
         </div>
-        <div class="text-center mt-3">
-            <h2 class="text-success border-bottom">Synopsis</h2>
+        <div class="row">
+            <div class="text-center mt-3">
+                <h2 class="text-success border-bottom">Synopsis</h2>
+            </div>
         </div>
         <div class="row my-3">
             <div class="col-md">

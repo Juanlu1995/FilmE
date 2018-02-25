@@ -31,6 +31,7 @@ Route::get('/profile', 'UsersController@profile')->middleware("auth");
 Route::group(['prefix' => 'contributes'], function () {
     Route::get('', 'ContributesController@index');
     Route::get('show/{slug}', 'ContributesController@show');
+    Route::get('autocomplete','ContributesController@autocompleteAJAX'); //AJAX
 });
 
 //Rutas reviews

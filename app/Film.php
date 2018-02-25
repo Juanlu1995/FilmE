@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Film extends Model {
     // Hacemos esto para que los campos dados no se pueden dar programáticamente.

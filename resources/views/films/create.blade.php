@@ -4,9 +4,12 @@
     Crear película
 @endsection
 
+@push('scripts')
+    <script src="{{asset('js/contributeAutocomplete.js')}}" defer></script>
+@endpush
 @section('content')
     <h1 class="">Create film</h1>
-    <form action="{{ url('/') }}/films/create" method="post">
+    <form action="{{ url('/') }}/films/create" method="post"  enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <div class="form-group">
@@ -21,8 +24,7 @@
                 </div>
             @endforeach
         @endif
-        <div class="form-group">
-            <label for="synopsis">Synopsis</label>
+        <div class="form-group">con
             <textarea id="synopsis" name="synopsis" class="form-control" placeholder="Synopsis"></textarea>
         </div>
 
@@ -70,39 +72,39 @@
             <label for="category">Category</label>
             <input type="text"
                    name="category" id="category" class="form-control" placeholder="Categorys">
-
-            <div class="form-group">
-                <label for="actors">Actors</label>
-                <input type="text"
-                       name="actors" id="actors" class="form-control" placeholder="Actors">
+        </div>
+        <div class="form-group">
+            <label for="actors">Actors</label>
+            <input type="text"
+                   name="actors" id="actors" class="form-control autoComplete" placeholder="Actors">
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="directors">Director</label>
+                    <input type="text"
+                           name="directors" id="directors" class="form-control autoComplete" placeholder="Director">
+                </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="directors">Director</label>
-                        <input type="text"
-                               name="directors" id="directors" class="form-control" placeholder="Director">
-                    </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="producer">Producer</label>
+                    <input type="text"
+                           name="producer" id="producer" class="form-control" placeholder="Producer">
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="producer">Producer</label>
-                        <input type="text"
-                               name="producer" id="producer" class="form-control" placeholder="Producer">
-                    </div>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="form-group">
-                        <label for="country">Country</label>
-                        <input type="text"
-                               name="country" id="country" class="form-control" placeholder="Country">
-                    </div>
-                </div>
-
-
             </div>
-            <input type="submit" class="btn btn-primary" value="Submit">
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text"
+                           name="country" id="country" class="form-control" placeholder="Country">
+                </div>
+            </div>
+
+
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
 
     </form>
 @endsection
