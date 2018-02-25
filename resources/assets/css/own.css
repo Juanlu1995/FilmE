@@ -38,6 +38,9 @@ Texto como footer en una imagen.
 
 
 
-#filmCarousel{
-    width: 30%;
+#filmCarousel * img{
+    height: 200px;
+}
+#userCarousel * img{
+    height: 200px;
 }

@@ -38,13 +38,13 @@
             </div>
         </div>
         <div class="row ml-1">
-            <carousel id="filmCarousel" :per-page="3" :autoplay="true" pagination-color="#3CA4E3" :pagination-padding=6
+            <carousel id="filmCarousel" :autoplay="true" :navigation-enabled="true"  :easing="'ease-out'" :scroll-per-page="true" pagination-color="#3CA4E3" :pagination-padding=6
                       class="my-3">
                 @foreach($film->reviews as $review)
                     <slide>
                         <div class="imagebox border border-dark">
                             <a href="/reviews/show/{{$review->id}}">
-                                <img class="d-block w-100" src="{{$review->user->avatar}}" alt="First slide">
+                                <img class="d-block" src="{{$review->user->avatar}}" alt="First slide">
                                 <span class="imagebox-desc">{{$review->user->name}}</span>
                             </a>
                         </div>
