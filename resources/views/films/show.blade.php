@@ -33,11 +33,11 @@
             </div>
         </div>
         <div class="row my-3">
-            <div class="col-md">
+            <div class="text-center mt-3">
                 <h2 class="border-bottom text-success">Reviews:</h2>
             </div>
         </div>
-        <div class="row ml-1">
+        <div class="row m-3">
             <carousel id="filmCarousel" :autoplay="true" :navigation-enabled="true"  :easing="'ease-out'" :scroll-per-page="true" pagination-color="#3CA4E3" :pagination-padding=6
                       class="my-3">
                 @foreach($film->reviews as $review)

@@ -36,9 +36,9 @@ Route::group(['prefix' => 'contributes'], function () {
 
 //Rutas reviews
 Route::group(['prefix' => 'reviews'], function () {
-    Route::get('/reviews/show/{review}/', 'ReviewsController@show');
-    Route::get('/reviews/show/user/{username}/', 'ReviewsController@showUserReviews');
-    Route::get('/reviews/show/film/{film}/', 'ReviewsController@showFilmReviews');
+    Route::get('show/{review}/', 'ReviewsController@show');
+    Route::get('show/user/{username}/', 'ReviewsController@showUserReviews');
+    Route::get('show/film/{film}/', 'ReviewsController@showFilmReviews');
 });
 
 //Ruta AJAX para gráfica de visitas de una película
