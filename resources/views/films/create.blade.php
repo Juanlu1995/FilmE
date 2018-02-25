@@ -5,12 +5,11 @@
 @endsection
 
 @push('scripts')
-    <script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
     <script src="{{asset('js/contributeAutocomplete.js')}}" defer></script>
 @endpush
 @section('content')
     <h1 class="">Create film</h1>
-    <form action="{{ url('/') }}/films/create" method="post">
+    <form action="{{ url('/') }}/films/create" method="post"  enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <div class="form-group">
@@ -25,8 +24,7 @@
                 </div>
             @endforeach
         @endif
-        <div class="form-group">
-            <label for="synopsis">Synopsis</label>
+        <div class="form-group">con
             <textarea id="synopsis" name="synopsis" class="form-control" placeholder="Synopsis"></textarea>
         </div>
 

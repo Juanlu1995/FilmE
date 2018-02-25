@@ -10,7 +10,6 @@ $(function () {
     axios.get('/contributes/autocomplete')
         .then(function (response) {
             contributes = response.data;
-            console.log(contributes);
         }).catch(function (e) {
         console.log(e)
     });
@@ -26,6 +25,7 @@ $(function () {
             // delegate back to autocomplete, but extract the last term
             response( $.ui.autocomplete.filter(
                 contributes, extractLast( request.term ) ) );
+            $(".ui-helper-hidden-accessible").first().addClass("invisible");
         },
         focus: function() {
             // prevent value inserted on focus
@@ -43,5 +43,5 @@ $(function () {
             return false;
         }
     });
-
+    // $(".ui-helper-hidden-accessible").first().children().last().addClass("invisible");
 });

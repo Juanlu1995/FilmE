@@ -87,7 +87,6 @@ $(function () {
     var contributes = void 0;
     axios.get('/contributes/autocomplete').then(function (response) {
         contributes = response.data;
-        console.log(contributes);
     }).catch(function (e) {
         console.log(e);
     });
@@ -101,6 +100,7 @@ $(function () {
         source: function source(request, response) {
             // delegate back to autocomplete, but extract the last term
             response($.ui.autocomplete.filter(contributes, extractLast(request.term)));
+            $(".ui-helper-hidden-accessible").first().addClass("invisible");
         },
         focus: function focus() {
             // prevent value inserted on focus
@@ -118,6 +118,7 @@ $(function () {
             return false;
         }
     });
+    // $(".ui-helper-hidden-accessible").first().children().last().addClass("invisible");
 });
 
 /***/ })
