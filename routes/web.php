@@ -18,7 +18,6 @@ Route::group(['prefix' => 'films'], function () {
     Route::post('create', 'FilmsController@store')->middleware("auth");
     Route::get('show/{film}', 'FilmsController@show');
 });
-
 //Ruta AJAX paginacion de palículas
 Route::get('/givemefilms/', 'PagesController@giveMeFilms'); //AJAX
 
@@ -36,16 +35,21 @@ Route::group(['prefix' => 'contributes'], function () {
 
 //Rutas reviews
 Route::group(['prefix' => 'reviews'], function () {
+    Route::get("", 'ReviewsController@index');
     Route::get('show/{review}/', 'ReviewsController@show');
     Route::get('show/user/{username}/', 'ReviewsController@showUserReviews');
     Route::get('show/film/{film}/', 'ReviewsController@showFilmReviews');
 });
+//Ruta AJAX paginacion de reviews
+Route::get('/givemereviews/', 'ReviewsController@giveMeReviews'); //AJAX
+
 
 //Ruta AJAX para gráfica de visitas de una película
 Route::get('/views/film/', 'ViewsController@getFilmViews'); //AJAX
 
 // Ruta AJAX validación registro de usuario
 Route::post('/register/validate', 'Auth\RegisterController@validateAJAX')->middleware('guest'); //AJAX
+
 Auth::routes();
 
 //Route::get('/', 'HomeController@index')->name('home');

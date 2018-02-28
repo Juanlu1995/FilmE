@@ -3,6 +3,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/validateRegister.js": "/js/validateRegister.js",
+    "/js/paginateReviews.js": "/js/paginateReviews.js",
     "/js/paginateIndex.js": "/js/paginateIndex.js",
     "/js/contributeAutocomplete.js": "/js/contributeAutocomplete.js",
     "/css/all.css": "/css/all.css"

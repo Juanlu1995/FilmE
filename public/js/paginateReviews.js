@@ -60,125 +60,55 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 292);
+/******/ 	return __webpack_require__(__webpack_require__.s = 349);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 292:
+/***/ 349:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(293);
+module.exports = __webpack_require__(350);
 
 
 /***/ }),
 
-/***/ 293:
+/***/ 350:
 /***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var $ = __webpack_require__(5);
 
-function gestionarErrores(input, errores) {
-    var noSendForm = false;
-    input = $(input);
-    if ((typeof errores === "undefined" ? "undefined" : _typeof(errores)) !== ( true ? "undefined" : _typeof(undefined))) {
-        input.removeClass("is-invalid");
-        input.addClass("is-invalid");
-        input.nextAll(".invalid-feedback").remove();
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+function getDataPaginate() {
+    event.preventDefault();
 
-        try {
-            for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var error = _step.value;
+    var target = $(event.target);
+    var value = parseInt(target.text());
+    var parent = target.parent();
 
-                input.after("<div class=\"invalid-feedback\">\n                <strong> " + error + " </strong>\n            </div>");
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
-                }
-            } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
-                }
-            }
-        }
+    var before = $(".page-item.active span.page-link");
+    var beforeVal = before.text();
+    var beforeParent = before.parent();
 
-        noSendForm = true;
-    } else {
-        input.removeClass("is-invalid");
-        input.addClass("is-valid");
-        input.nextAll(".invalid-feedback").remove();
-    }
-    return noSendForm;
-}
+    beforeParent.html("<a href=\"http://filme.test/reviews?page=" + beforeVal + "\" class=\"page-link\">" + beforeVal + "</a>");
+    beforeParent.removeClass("active");
 
-function validateTarget(target) {
-    var formData = new FormData();
-    formData.append(target.id, target.value);
-    $(target).parent().next(".spinner").addClass("sk-circle");
-    axios.post('/register/validate', formData).then(function (response) {
-        $(target).parent().next(".spinner").removeClass("sk-circle");
-        switch (target.id) {
-            case "name":
-                gestionarErrores(target, response.data.name);
-                break;
-            case "lastName":
-                gestionarErrores(target, response.data.lastName);
-                break;
-            case "username":
-                gestionarErrores(target, response.data.username);
-                break;
-            case "email":
-                gestionarErrores(target, response.data.email);
-                break;
-        }
+    parent.addClass("active");
+    parent.html("<span class=\"page-link\">" + value + "</span>");
+
+    axios.get('/givemereviews?page=' + value).then(function (response) {
+        $(".content").html(response.data);
+        attachAsyncTask();
     }).catch(function (error) {
         console.log(error);
     });
 }
 
+function attachAsyncTask() {
+    $("a.page-link").on('click', getDataPaginate);
+}
+
 $(function () {
-    $("#name,#lastName,#username,#email").on('change', function (e) {
-        validateTarget(e.target);
-    });
-
-    $("#registerButton").click(function (e) {
-        e.preventDefault();
-        var sendForm = true;
-        var formData = new FormData();
-        formData.append('name', $("#name").val());
-        formData.append('lastName', $("#lastName").val());
-        formData.append('username', $("#username").val());
-        formData.append('email', $("#email").val());
-
-        axios.post('/register/validate', formData).then(function (response) {
-            if (gestionarErrores("#name", response.data.name)) {
-                sendForm = false;
-            }
-            if (gestionarErrores("#lastName", response.data.lastName)) {
-                sendForm = false;
-            }
-            if (gestionarErrores("#username", response.data.username)) {
-                sendForm = false;
-            }
-            if (gestionarErrores("#email", response.data.email)) {
-                sendForm = false;
-            }
-
-            if (sendForm === true) {
-                $("#registerForm").submit();
-            }
-        });
-    });
+    attachAsyncTask();
 });
 
 /***/ }),

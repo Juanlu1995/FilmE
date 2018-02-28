@@ -118,7 +118,6 @@ $(function () {
             return false;
         }
     });
-    // $(".ui-helper-hidden-accessible").first().children().last().addClass("invisible");
 });
 
 /***/ })

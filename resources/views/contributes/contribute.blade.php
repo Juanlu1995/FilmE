@@ -1,5 +1,5 @@
 <div class="row py-5 border-bottom">
-    <div class="col-md-4">
+    <div class="col-lg-4">
         <div class="imagebox border border-dark">
             <a href="/contribute/show/{{ $contribute['slug'] }}">
                 <img src="{{$contribute['photo']}}" alt="{{$contribute['name']}} photo" class="img-fluid">
@@ -7,7 +7,7 @@
             </a>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-lg-8">
         <div class="row">
             <a href="/contribute/show/{{ $contribute['id'] }}">
                 <h1 class="display-4 col">{{ $contribute['name'] }} {{$contribute['last_name']}} </h1>

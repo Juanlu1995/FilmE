@@ -76,7 +76,7 @@ module.exports = __webpack_require__(295);
 /***/ 295:
 /***/ (function(module, exports, __webpack_require__) {
 
-var $ = __webpack_require__(6);
+var $ = __webpack_require__(5);
 
 function getDataPaginate() {
     event.preventDefault();
@@ -113,7 +113,7 @@ $(function () {
 
 /***/ }),
 
-/***/ 6:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!

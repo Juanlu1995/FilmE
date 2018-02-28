@@ -24,7 +24,8 @@
                 </div>
             @endforeach
         @endif
-        <div class="form-group">con
+        <div class="form-group">
+            <label for="synopsis">Synopsis</label>
             <textarea id="synopsis" name="synopsis" class="form-control" placeholder="Synopsis"></textarea>
         </div>
 
@@ -44,14 +45,14 @@
 
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label for="date">Date</label>
                     <input type="date"
                            name="date" id="date" class="form-control" placeholder="Date">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
 
                 <div class="form-group">
                     <label for="duration">Duration</label>
@@ -59,7 +60,7 @@
                            name="duration" id="duration" class="form-control" placeholder="duration">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label for="rating">Rating</label>
                     <input type="number"
@@ -79,21 +80,21 @@
                    name="actors" id="actors" class="form-control autoComplete" placeholder="Actors">
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label for="directors">Director</label>
                     <input type="text"
                            name="directors" id="directors" class="form-control autoComplete" placeholder="Director">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
                 <div class="form-group">
                     <label for="producer">Producer</label>
                     <input type="text"
                            name="producer" id="producer" class="form-control" placeholder="Producer">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4">
 
                 <div class="form-group">
                     <label for="country">Country</label>
