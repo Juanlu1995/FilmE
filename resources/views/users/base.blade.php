@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4">
         <img src="{{$user['avatar']}}" alt="avatar" class="mt-5 img-fluid img-thumbnail">
     </div>
-    <div class="col-md-8">
-        <h1 class="offset-md-2">{{$user['name']}} {{$user['last_name']}}
+    <div class="col-lg-8">
+        <h1 class="offset-lg-2">{{$user['name']}} {{$user['last_name']}}
             <small class="text-muted"> {{$user['username']}}</small>
         </h1>
         <div class="m-3">

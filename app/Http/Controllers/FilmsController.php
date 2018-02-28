@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\actor;
+use App\Contribute;
 use App\Film;
 use App\Http\Requests\CreateFilmRequest;
 use App\View;
@@ -28,26 +30,57 @@ class FilmsController extends Controller {
     public function store(CreateFilmRequest $request) {
         $vacio = "Empty";
 
-        if( $image = $request->file('cover') ){
-            $url = $image->store('cover','public');
-        }else{
-            $url = "https://picsum.photos/800/600/?".mt_rand(1,1000);
+        $actors = explode(",", $request->input('actors'));
+        array_walk($actors, function (&$actor) {
+            $actor = trim($actor);
+        });
+        $directors = explode(",", $request->input('directors'));
+        array_walk($directors, function (&$director) {
+            $director = trim($director);
+        });
+
+        $actors = array_diff($actors, array(""));
+        array_walk($actors, function (&$actor) {
+            $actor = trim($actor);
+            $actor = Contribute::firstOrCreate(['name' => $actor]);
+        });
+        $directors = array_diff($directors, array(""));
+        array_walk($directors, function (&$director) {
+            $director = trim($director);
+            $director = Contribute::firstOrCreate(['name' => $director]);
+        });
+
+
+
+        if ($image = $request->file('cover')) {
+            $url = $image->store('cover', 'public');
+        } else {
+            $url = "https://picsum.photos/800/600/?" . mt_rand(1, 1000);
         }
 
-        Film::create([
+        $film = Film::create([
             'user_id' => $request->user()->id,
             'name' => $request->input('name'),
             'synopsis' => $request->input('synopsis') ?: $vacio,
             'cover' => $url,
             'date' => $request->input('date'),
             'duration' => $request->input('duration') ?: "0",
-            //todo Implementar category, directores, productores y actores.
+            //todo Implementar category, directores, productores y actors.
             'rating' => $request->input('rating') ?: "0",
             //todo Que la nacionalidad, si no existe una real, sea el valor 1 = none;
             'nationality_id' => $request->input('country') ?: 1,
 
         ]);
-        return redirect('/films/show/' . Film::latest()->first()->id);
+
+
+        foreach ($actors as $actor) {
+            $film->actors()->attach($actor);
+        }
+        foreach ($directors as $director){
+            $film->directors()->attach($director);
+        }
+
+        return redirect('/films/show/' . $film->id);
     }
 
     /**
@@ -58,15 +91,14 @@ class FilmsController extends Controller {
      */
     public function show(Film $film, Request $request) {
 
-
         if ($film) {
             View::create([
                 'film_id' => $film->id,
                 'user_id' => $request->user() ? $request->user()->id : null,
                 'ip' => $request->ip(),
-                ]);
+            ]);
         }
-
+        $film = $film->with(['actors','directors'])->first();
         return view('films.show', [
             "film" => $film
         ]);

@@ -6,6 +6,7 @@ use App\Film;
 use App\Review;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ReviewsController extends Controller
 {
@@ -16,7 +17,9 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        //todo ultimas reviews
+        $reviews = Review::orderBy('updated_at','desc')->paginate(9);
+
+        return view('reviews.reviews', ['reviews' => $reviews]);
     }
 
     /**
@@ -99,5 +102,14 @@ class ReviewsController extends Controller
         $reviews = $user->reviews()->paginate(9);
 
         return view('reviews.showUserReviews',['user' => $user, 'reviews' => $reviews]);
+    }
+
+    public function giveMeReviews(){
+        if (request()->ajax()){
+            $reviews = Review::orderBy('updated_at', 'desc')->paginate(9);
+            return View::make('reviewsList', array('reviews' => $reviews))->render();
+        }else{
+            return redirect('/');
+        }
     }
 }
