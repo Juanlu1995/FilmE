@@ -1,7 +1,6 @@
 /*
 Texto como footer en una imagen.
 */
-
 .imagebox {
     background: black;
     padding: 0px;
@@ -38,6 +37,16 @@ Texto como footer en una imagen.
 
 
 /*
+Footer
+*/
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+
+/*
 Carousels
 */
 #filmReviewsCarousel * img{
@@ -48,5 +57,5 @@ Carousels
     max-width: 400px;
 }
 #userCarousel * img{
-    height: 200px;
+    height: 150px;
 }

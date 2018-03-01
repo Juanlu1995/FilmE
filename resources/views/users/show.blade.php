@@ -2,6 +2,6 @@
 
 @section('content')
 
-    @include('users.base')
+    @include('users.partials.base')
 
 @endsection

@@ -7,6 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller {
+
+    private $user;
+
+    public function __construct() {
+        $this->middleware( function($request, $next){
+            $this->user = auth()->user();
+
+            return $next($request);
+        });
+
+        $this->user = auth()->user();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -67,11 +80,10 @@ class UsersController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        //
+    public function edit() {
+        return view('users.edit', ['user' => $this->user]);
     }
 
     /**

@@ -23,7 +23,10 @@ Route::get('/givemefilms/', 'PagesController@giveMeFilms'); //AJAX
 
 
 // Rutas usuario
-Route::get('/users/{username}', 'UsersController@show');
+Route::group(['prefix' => 'users'], function (){
+    Route::get('show/{username}', 'UsersController@show');
+    Route::get('edit/{username}', 'UsersController@edit');
+});
 Route::get('/profile', 'UsersController@profile')->middleware("auth");
 
 //Ruta contributes

@@ -119,10 +119,25 @@
           transform: scale(1);
       }
 }
+html {
+    min-height: 100%;
+    position: relative;
+}
+body {
+    margin: 0;
+}
+footer {
+    background-color: black;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
 /*
 Texto como footer en una imagen.
 */
-
 .imagebox {
     background: black;
     padding: 0px;
@@ -159,6 +174,16 @@ Texto como footer en una imagen.
 
 
 /*
+Footer
+*/
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+
+/*
 Carousels
 */
 #filmReviewsCarousel * img{
@@ -169,5 +194,5 @@ Carousels
     max-width: 400px;
 }
 #userCarousel * img{
-    height: 200px;
+    height: 150px;
 }
