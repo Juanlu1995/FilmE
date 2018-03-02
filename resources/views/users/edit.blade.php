@@ -8,13 +8,13 @@
             <thead class="bg-dark">
             <tr>
                 <th scope="col"
-                    class="{{Route::currentRouteName() == 'profile.data' ? 'table-light' : 'table-dark'}} text-center">
+                    class="{{Route::currentRouteName() == 'profile.data' ? 'table-light' : ''}} text-center">
                     <a href="/profile/edit/data">Data</a></th>
                 <th scope="col"
-                    class="{{Route::currentRouteName() == 'profile.password' ? 'table-light' : 'table-dark'}} text-center">
+                    class="{{Route::currentRouteName() == 'profile.password' ? 'table-light' : ''}} text-center">
                     <a href="/profile/edit/password">Password</a></th>
                 <th scope="col"
-                    class="{{Route::currentRouteName() == 'profile.about' ? 'table-light' : 'table-dark'}} text-center">
+                    class="{{Route::currentRouteName() == 'profile.about' ? 'table-light' : ''}} text-center">
                     <a href="/profile/edit/about">About</a></th>
             </tr>
             </thead>

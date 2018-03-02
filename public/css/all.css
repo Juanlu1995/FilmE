@@ -119,22 +119,6 @@
           transform: scale(1);
       }
 }
-html {
-    min-height: 100%;
-    position: relative;
-}
-body {
-    margin: 0;
-}
-footer {
-    background-color: black;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-
-
 /*
 Texto como footer en una imagen.
 */
@@ -172,27 +156,42 @@ Texto como footer en una imagen.
     padding-bottom: 10%;
 }
 
-
-/*
-Footer
-*/
-#footer {
-    position:absolute;
-    bottom:0;
-    width:100%;
+html {
+    height: 100%;
 }
 
+body {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+body::after{
+    content: '';
+    display: block;
+    height: 100px;
+}
+
+footer{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    height: 100px;
+}
 
 /*
 Carousels
 */
-#filmReviewsCarousel * img{
+#filmReviewsCarousel * img {
     height: 200px;
 }
-#filmActorsCarousel * img{
+
+#filmActorsCarousel * img {
     height: 200px;
     max-width: 400px;
 }
-#userCarousel * img{
+
+#userCarousel * img {
     height: 150px;
 }
