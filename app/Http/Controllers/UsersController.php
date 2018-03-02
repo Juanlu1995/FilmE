@@ -82,7 +82,7 @@ class UsersController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit() {
+    public function edit(Request $request) {
         return view('users.edit', ['user' => $this->user]);
     }
 
