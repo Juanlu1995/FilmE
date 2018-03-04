@@ -21,13 +21,15 @@
         </table>
 
     </div>
+    <form action="{{ Request::url() }}" method="post" {{ Route::currentRouteName() == 'profile.about' ? 'enctype="multipart/form-data"' : ''}}>
+        {{ csrf_field() }}
+        @if(Route::currentRouteName() == 'profile.data')
+            @include('users.partials.data')
+        @elseif(Route::currentRouteName() == 'profile.password' )
+            @include('users.partials.password')
+        @elseif(Route::currentRouteName() == 'profile.about' )
 
-    @if(Route::currentRouteName() == 'profile.data')
-        @include('users.partials.data')
-    @elseif(Route::currentRouteName() == 'profile.password' )
-        @include('users.partials.password')
-    @elseif(Route::currentRouteName() == 'profile.about' )
-        @include('users.partials.about')
-    @endif
-
+            @include('users.partials.about')
+        @endif
+    </form>
 @endsection

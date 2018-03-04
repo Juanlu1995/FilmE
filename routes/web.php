@@ -30,6 +30,10 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function (){
     Route::get('edit/data', 'UsersController@edit')->name('profile.data');
     Route::get('edit/password', 'UsersController@edit')->name('profile.password');
     Route::get('edit/about', 'UsersController@edit')->name('profile.about');
+    Route::post('edit/', 'UsersController@update');
+    Route::post('edit/data', 'UsersController@update');
+    Route::post('edit/password', 'UsersController@update');
+    Route::post('edit/about', 'UsersController@update');
 });
 
 //Ruta contributes

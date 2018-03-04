@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +13,7 @@ class UsersController extends Controller {
     private $user;
 
     public function __construct() {
-        $this->middleware( function($request, $next){
+        $this->middleware(function ($request, $next) {
             $this->user = auth()->user();
 
             return $next($request);
@@ -82,7 +84,8 @@ class UsersController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request) {
+    public function edit() {
+//        dd($request);
         return view('users.edit', ['user' => $this->user]);
     }
 
@@ -90,11 +93,22 @@ class UsersController extends Controller {
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(UpdateUserRequest $request) {
+        dd($request);
+
+        $path = $request->path();
+
+        if ($path == 'profile/edit' || $path == 'profile/edit/data') {
+
+        } elseif ($path == 'profile/edit/password') {
+
+        } elseif ($path == 'profile/edit/about') {
+
+        }
+
+        return redirect('/profile/edit');
     }
 
     /**

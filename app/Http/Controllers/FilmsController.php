@@ -65,7 +65,7 @@ class FilmsController extends Controller {
             'cover' => $url,
             'date' => $request->input('date'),
             'duration' => $request->input('duration') ?: "0",
-            //todo Implementar category, directores, productores y actors.
+            //todo Implementar category y productores.
             'rating' => $request->input('rating') ?: "0",
             //todo Que la nacionalidad, si no existe una real, sea el valor 1 = none;
             'nationality_id' => $request->input('country') ?: 1,
