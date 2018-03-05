@@ -17,6 +17,8 @@ class CreateFilmRequest extends FormRequest {
     /**
      * Get the validation rules that apply to the request.
      *
+     * Las unicas reglas son para el nombre, que es requerido y con una máximo de 255 carácteres
+     *
      * @return array
      */
     public function rules() {

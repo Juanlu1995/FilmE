@@ -11,83 +11,24 @@ class PagesController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * Mostramos una lista de películas ordenadas por las visitas a la película
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $films = Film::withCount('views')->orderBy('views_count', 'desc')->paginate(9   );
+        $films = Film::with('user')->withCount('views')->orderBy('views_count', 'desc')->paginate(9);
         return view('home', ['films' => $films]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Devolvemos una vista pra mostrarla por asíncronamete renderizando la vista de la lista de películas
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function giveMeFilms(){
         if (request()->ajax()){
-            $films = Film::withCount('views')->orderBy('views_count', 'desc')->paginate(10);
+            $films = Film::with('user')->withCount('views')->orderBy('views_count', 'desc')->paginate(10);
             return View::make('films.listFilms', array('films' => $films))->render();
         }else{
             return redirect('/');

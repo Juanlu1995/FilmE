@@ -30,7 +30,9 @@ class RegisterUserRequest extends FormRequest {
         return $rules;
     }
 
-
+    /**
+     * @return array de todos los mensajes
+     */
     public function messages() {
         $messagesName = $this->messagesName();
         $messagesLastName = $this->messagesLastName();
@@ -46,7 +48,9 @@ class RegisterUserRequest extends FormRequest {
 
     }
 
-
+    /**
+     * @return array de los mensajes de error del nombre
+     */
     protected function messagesName() {
         $messages = array();
         $messages["name.required"] = 'El nombre es requerido';
@@ -55,6 +59,9 @@ class RegisterUserRequest extends FormRequest {
         return $messages;
     }
 
+    /**
+     * @return array de los mensajes de error del apellido
+     */
     protected function messagesLastName() {
         $messages = array();
         $messages["lastName.required"] = 'El apellido es requerido';
@@ -63,6 +70,9 @@ class RegisterUserRequest extends FormRequest {
         return $messages;
     }
 
+    /**
+     * @return array de los mensajes de error del username
+     */
     protected function messagesUsername() {
         $messages = array();
         $messages["username.required"] = 'El nombre de usuario es requerido';
@@ -72,6 +82,9 @@ class RegisterUserRequest extends FormRequest {
         return $messages;
     }
 
+    /**
+     * @return array de los mensajes de erorr del email
+     */
     protected function messagesEMail() {
         $messages = array();
         $messages["email.required"] = 'El email es requerido';

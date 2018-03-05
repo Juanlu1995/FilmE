@@ -5,6 +5,12 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Representa una persona que puede desempeñar diferentes papeles en una película.
+ *
+ * Class Contribute
+ * @package App
+ */
 class Contribute extends Model {
     protected $fillable = ['name', 'lastName', 'slug', 'birth_date', 'nacionality'];
 

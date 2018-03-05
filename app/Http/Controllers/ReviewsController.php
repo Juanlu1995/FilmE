@@ -11,13 +11,13 @@ use Illuminate\View\View;
 class ReviewsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource order by update date.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $reviews = Review::orderBy('updated_at','desc')->paginate(9);
+        $reviews = Review::with('film')->orderBy('updated_at','desc')->paginate(9);
 
         return view('reviews.reviews', ['reviews' => $reviews]);
     }
@@ -89,13 +89,24 @@ class ReviewsController extends Controller
     }
 
 
+    /**
+     * Muestra la lista de reviews de una película.
+     *
+     * @param Film $film
+     * @return \Illuminate\Contracts\View\Factory|View
+     */
     public function showFilmReviews(Film $film){
         $reviews = $film->reviews()->paginate(9);
 
         return view('reviews.showFilmReviews',['film' => $film, 'reviews' => $reviews]);
     }
 
-
+    /**
+     * Muestra la lista de reviews que ha hecho un usuario
+     *
+     * @param $username
+     * @return \Illuminate\Contracts\View\Factory|View
+     */
     public function showUserReviews($username){
         $user = User::where('username', $username)->first();
 
@@ -104,6 +115,12 @@ class ReviewsController extends Controller
         return view('reviews.showUserReviews',['user' => $user, 'reviews' => $reviews]);
     }
 
+
+    /**
+     * Da la vista de la lista de reviews ordenadas por fecha de actualización para mostrárla asíncronamente.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function giveMeReviews(){
         if (request()->ajax()){
             $reviews = Review::orderBy('updated_at', 'desc')->paginate(9);
