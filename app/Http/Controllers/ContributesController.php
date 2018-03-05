@@ -80,7 +80,12 @@ class ContributesController extends Controller {
         //
     }
 
-
+    /**
+     * Nos devuelve una lista de Contributes en formato JSON.
+     *
+     * @param Request $request
+     * @return JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function autocompleteAJAX(Request $request) {
         if ($request->ajax()) {
 

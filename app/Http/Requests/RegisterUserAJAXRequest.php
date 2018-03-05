@@ -35,6 +35,10 @@ class RegisterUserAJAXRequest extends RegisterUserRequest
         return $rules;
     }
 
+    /**
+     * @param \Illuminate\Contracts\Validation\Validator $validator
+     * @throws ValidationException
+     */
     protected function failedValidation($validator) {
         $errors = $validator->errors();
         $response = new JsonResponse([

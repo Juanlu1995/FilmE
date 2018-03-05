@@ -17,6 +17,8 @@ class UpdateUserRequest extends RegisterUserRequest {
     /**
      * Get the validation rules that apply to the request.
      *
+     * Vemos qué es lo que estamos validando y sólo obtenemos las reglas de aquello que estemos comprobando.
+     *
      * @return array
      */
     public function rules() {
@@ -57,43 +59,69 @@ class UpdateUserRequest extends RegisterUserRequest {
         return $rules;
     }
 
-
+    /**
+     * @return string de las relgas de validación
+     */
     protected function validateName() {
         return 'nullable|regex:/^[\pL\s\-]+$/u|max:255';
     }
 
+    /**
+     * @return string de las relgas de validación
+     */
     protected function validateLastName() {
         return 'nullable|regex:/^[\pL\s\-]+$/u|max:255';
     }
 
+    /**
+     * @return string de las relgas de validación
+     */
     protected function validateEmail() {
         return 'nullable|email|max:255|unique:users';
     }
 
+    /**
+     * @return string de las relgas de validación
+     */
     protected function validateAvatar() {
         return 'nullable|mimes:jpeg,jpg,png';
     }
 
+    /**
+     * @return array de las relgas de validacion del teléfono. No es un string ya que las expresiones regulares utilzan
+     * carácteres que se utilizan en los string de validación.
+     */
     protected function validatePhone() {
         return [
             'nullable',
             'regex:/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/   '
-            ];
+        ];
     }
 
+    /**
+     * @return string de las relgas de validación
+     */
     protected function validateWebsite() {
         return 'nullable|url';
     }
 
+    /**
+     * @return string de las relgas de validación
+     */
     protected function validateCurrentPassword() {
         return 'required|string|min:6';
     }
 
+    /**
+     * @return string de las relgas de validación
+     */
     protected function validatePassword() {
         return 'required|string|min:6|confirmed';
     }
 
-
+    /**
+     * @return array de los mensajes de error
+     */
     public function messages() {
 
         $messagesAvatar = $this->messagesAvatar();
@@ -117,12 +145,18 @@ class UpdateUserRequest extends RegisterUserRequest {
         );
     }
 
+    /**
+     * @return array de los mensajes de eror
+     */
     protected function messagesAvatar() {
         $messages = [];
         $messages["avatar.mimes"] = 'El avatar no tiene un formato válido.';
         return $messages;
     }
 
+    /**
+     * @return array de los mensajes de eror
+     */
     protected function messagesPhone() {
         $messages = [];
 
@@ -131,6 +165,9 @@ class UpdateUserRequest extends RegisterUserRequest {
 
     }
 
+    /**
+     * @return array de los mensajes de eror
+     */
     protected function messagesWebsite() {
         $messages = [];
 
@@ -139,6 +176,9 @@ class UpdateUserRequest extends RegisterUserRequest {
 
     }
 
+    /**
+     * @return array de los mensajes de eror
+     */
     private function messagesCurrentPassword() {
         $messages = [];
 
@@ -150,6 +190,9 @@ class UpdateUserRequest extends RegisterUserRequest {
     }
 
 
+    /**
+     * @return array de los mensajes de eror
+     */
     private function messagesPassword() {
         $messages = [];
 
@@ -162,6 +205,9 @@ class UpdateUserRequest extends RegisterUserRequest {
     }
 
 
+    /**
+     * @return array de los mensajes de eror
+     */
     protected function messagesName() {
         $messages = array();
         $messages["name.regex"] = 'El nombre sólo acepta letras y espacios';
@@ -169,6 +215,9 @@ class UpdateUserRequest extends RegisterUserRequest {
         return $messages;
     }
 
+    /**
+     * @return array de los mensajes de eror
+     */
     protected function messagesLastName() {
         $messages = array();
         $messages["lastName.regex"] = 'El apellido sólo acepta letras y espacios';
@@ -176,6 +225,9 @@ class UpdateUserRequest extends RegisterUserRequest {
         return $messages;
     }
 
+    /**
+     * @return array de los mensajes de eror
+     */
     protected function messagesEMail() {
         $messages = array();
         $messages["email.email"] = 'No es un email válido';

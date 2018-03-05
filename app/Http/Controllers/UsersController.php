@@ -23,45 +23,18 @@ class UsersController extends Controller {
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index() {
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request) {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  User user
      * @return \Illuminate\Http\Response
      */
     public function show($username) {
-        $user = User::where('username', $username)->firstOrFail();
+        $user = User::with('reviews')->where('username', $username)->firstOrFail();
 
-        $reviews = $user->reviews;
 
-        return view('users.show', ['user' => $user, 'reviews' => $reviews]);
+//        return view('users.show', ['user' => $user, 'reviews' => $reviews]);
+        return view('users.show', ['user' => $user]);
+
     }
 
 
@@ -73,9 +46,9 @@ class UsersController extends Controller {
      */
     public function profile(Request $request) {
         $user = $request->user();
-        $reviews = $user->reviews;
+        $user = User::with('reviews')->findOrFail($user->id);
 
-        return view('users.profile', ['user' => $user, 'reviews' => $reviews]);
+        return view('users.profile', ['user' => $user]);
     }
 
 
@@ -85,12 +58,16 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit() {
-//        dd($request);
         return view('users.edit', ['user' => $this->user]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * Si no tenemos errores probamos de qué ruta provenimos y según la ruta editamos al usuario con
+     * todos los valores dador o comprobamos, en el caso de las contraseñas, que no haya fallos. Si es así
+     * devolvemos la vista con los fallos y si no editamos el usuario, lo guardamos y volvemos a la anterior vista con
+     * un mensaje de que la edición se ha efectuado correctamente.
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
