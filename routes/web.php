@@ -14,8 +14,10 @@ Route::get('/', 'PagesController@index');
 
 // Rutas de películas
 Route::group(['prefix' => 'films'], function () {
-    Route::get('create', 'FilmsController@create')->middleware("auth");
-    Route::post('create', 'FilmsController@store')->middleware("auth");
+    Route::group([ 'middleware' => 'auth'], function (){
+        Route::get('create', 'FilmsController@create')->middleware("auth");
+        Route::post('create', 'FilmsController@store')->middleware("auth");
+    });
     Route::get('show/{film}', 'FilmsController@show');
 });
 //Ruta AJAX paginacion de palículas

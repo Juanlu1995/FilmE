@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@push('scripts')
+    <link rel="stylesheet" href="{{asset('css/iziModal.css')}}">
+    <script src="{{asset('js/modals.js')}}" defer></script>
+
+@endpush
 
 @section('content')
 
@@ -33,4 +38,8 @@
     </div>
 
 
+
+    <div id="modal">
+        <div class="alert alert-danger"><Strong>Caution!</Strong> If you continue, you won't be able to get it back.</div>
+    </div>
 @endsection

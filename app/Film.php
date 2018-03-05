@@ -11,7 +11,7 @@ class Film extends Model {
     protected $guarded = ["id", "reviews_counted", "created_at", "updated_at",];
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 
     public function categories() {

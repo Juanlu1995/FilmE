@@ -17,5 +17,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/filmGraph.js', 'public/js')
     .js('resources/assets/js/contributeAutocomplete.js', 'public/js')
     .js("resources/assets/js/paginateReviews.js", "public/js")
+    .js('resources/assets/js/modals.js', 'public/js')
+    .styles(["node_modules/izimodal/css/iziModal.css"], 'public/css/iziModal.css')
     .styles(['resources/assets/css/spinner.css', 'resources/assets/css/own.css'], 'public/css/all.css')
     .sass('resources/assets/sass/app.scss', 'public/css');
