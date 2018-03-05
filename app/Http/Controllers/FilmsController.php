@@ -24,6 +24,14 @@ class FilmsController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
+     * Extraemos en forma de array lo que serán los actores y directores le damos un formato
+     * al string del nombre del actor/director para posteriormente hacer una búsqueda en la base de datos.
+     * Si existe, tramformamos ese String en el Contribute encontrado y si no existe lo creamos.
+     * Comprobamos el formato de la imagen (si es un url o un archivo) y lo guardamos.
+     * Creamos la película y le damos la lista de actores y directores a la película.
+     *
+     * TODO nacionalidad y productores
+     *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -49,7 +57,6 @@ class FilmsController extends Controller {
             $director = trim($director);
             $director = Contribute::firstOrCreate(['name' => $director]);
         });
-
 
 
         if ($image = $request->file('cover')) {
@@ -86,6 +93,9 @@ class FilmsController extends Controller {
     /**
      * Display the specified resource.
      *
+     * Creamos una nueva vista a la película en la cual guardamos el usuario logueado (si lo está),
+     * la película visitada y la ip.
+     *
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
@@ -98,7 +108,7 @@ class FilmsController extends Controller {
                 'ip' => $request->ip(),
             ]);
         }
-        $film = $film->with(['actors','directors'])->first();
+        $film = $film->with(['actors','directors'])->firstOrFail();
         return view('films.show', [
             "film" => $film
         ]);
