@@ -8,7 +8,7 @@
             </div>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="avatar" name="avatar">
-                <label class="custom-file-label" for="inputGroupFile01">Chose Avatar</label>
+                <label class="custom-file-label {{$errors->has('avatar') ? 'is-invalid' : ''}}" for="inputGroupFile01">Chose Avatar</label>
                 @if($errors->has('avatar'))
                     <div class="invalid-feedback">
                         <strong>{{ $errors->first('avatar') }}</strong>
@@ -21,7 +21,7 @@
         <div class="row form-group">
             <div class="col-lg-6">
                 <label for="phone">Phone</label>
-                <input type="text" name="phone" class="form-control" id="phone" placeholder="{{$user->phone}}">
+                <input type="text" name="phone" class="form-control {{$errors->has('phone') ? 'is-invalid' : ''}}" id="phone" placeholder="{{$user->phone}}">
                 @if($errors->has('phone'))
                     <div class="invalid-feedback">
                         <strong>{{ $errors->first('phone') }}</strong>
@@ -30,11 +30,11 @@
             </div>
             <div class="col-lg-6">
                 <label for="website">Website</label>
-                <input type="text" name="website" id="website" class="form-control"
+                <input type="text" name="website" id="website" class="form-control {{$errors->has('website') ? 'is-invalid' : ''}}"
                        placeholder="{{$user->website}}">
-                @if($errors->has('phone'))
+                @if($errors->has('website'))
                     <div class="invalid-feedback">
-                        <strong>{{ $errors->first('phone') }}</strong>
+                        <strong>{{ $errors->first('website') }}</strong>
                     </div>
                 @endif
             </div>

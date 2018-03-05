@@ -96,19 +96,36 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request) {
-        dd($request);
 
         $path = $request->path();
 
         if ($path == 'profile/edit' || $path == 'profile/edit/data') {
+            $data = array_filter($request->all());
+            $user = User::findOrFail($this->user->id);
 
+            $user->fill($data);
         } elseif ($path == 'profile/edit/password') {
 
-        } elseif ($path == 'profile/edit/about') {
+            if( ! Hash::check($request->get('current_password'), $this->user->password ) ){
+                return redirect()->back()->with('error', 'La constraseña actual no es correcta');
+            }
 
+            if( strcmp($request->get('current_password'), $request->get('password')) == 0){
+                return redirect()->back()->with('error', 'La nueva contraseña debe ser diferente de la antigua.');
+            }
+
+            $this->user->password = bcrypt($request->get('password'));
+
+        } elseif ($path == 'profile/edit/about') {
+            $data = array_filter($request->all());
+            $user = User::findOrFail($this->user->id);
+
+            $user->fill($data);
         }
 
-        return redirect('/profile/edit');
+        $user->save();
+
+        return redirect('/'.$path)->with('updated_success', 'Los datos se han actualizado correctamente');
     }
 
     /**

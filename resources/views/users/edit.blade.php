@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <div class="row border-bottom mb-5">
         <table class="mt-4 table table-striped table-bordered">
             <thead class="bg-dark">
@@ -21,6 +20,12 @@
         </table>
 
     </div>
+
+    @if(session('updated_success'))
+        <div class="alert alert-success">
+            <strong>{{session('updated_success')}}</strong>
+        </div>
+    @endif
     <form action="{{ Request::url() }}" method="post" {{ Route::currentRouteName() == 'profile.about' ? 'enctype="multipart/form-data"' : ''}}>
         {{ csrf_field() }}
         @if(Route::currentRouteName() == 'profile.data')

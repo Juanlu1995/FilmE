@@ -57,16 +57,32 @@ class UpdateUserRequest extends RegisterUserRequest {
         return $rules;
     }
 
+
+    protected function validateName() {
+        return 'nullable|regex:/^[\pL\s\-]+$/u|max:255';
+    }
+
+    protected function validateLastName() {
+        return 'nullable|regex:/^[\pL\s\-]+$/u|max:255';
+    }
+
+    protected function validateEmail() {
+        return 'nullable|email|max:255|unique:users';
+    }
+
     protected function validateAvatar() {
-        return 'mimes:jpeg,jpg,png';
+        return 'nullable|mimes:jpeg,jpg,png';
     }
 
     protected function validatePhone() {
-        return 'regex:/^(\+36)[0-9]{9}$/';
+        return [
+            'nullable',
+            'regex:/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/   '
+            ];
     }
 
     protected function validateWebsite() {
-        return 'url';
+        return 'nullable|url';
     }
 
     protected function validateCurrentPassword() {
@@ -80,66 +96,91 @@ class UpdateUserRequest extends RegisterUserRequest {
 
     public function messages() {
 
-        $menssagesAvatar = $this->menssagesAvatar();
-        $menssagesPhone = $this->menssagesPhone();
-        $menssagesWebsite = $this->menssagesWebsite();
-        $menssagesCurrentPassword = $this->menssagesCurrentPassword();
-        $menssagesPassword = $this->menssagesPassword();
+        $messagesAvatar = $this->messagesAvatar();
+        $messagesPhone = $this->messagesPhone();
+        $messagesWebsite = $this->messagesWebsite();
+        $messagesCurrentPassword = $this->messagesCurrentPassword();
+        $messagesPassword = $this->messagesPassword();
+        $messagesName = $this->messagesName();
+        $messagesLastName = $this->messagesLastName();
+        $messagesEmail = $this->messagesEMail();
 
-
-        $parentMenssages = parent::messages();
-
-        return $menssages = array_merge(
-            $menssagesAvatar,
-            $menssagesPhone,
-            $menssagesWebsite,
-            $menssagesCurrentPassword,
-            $menssagesPassword,
-            $parentMenssages
+        return $messages = array_merge(
+            $messagesAvatar,
+            $messagesPhone,
+            $messagesWebsite,
+            $messagesCurrentPassword,
+            $messagesPassword,
+            $messagesName,
+            $messagesLastName,
+            $messagesEmail
         );
     }
 
-    protected function menssagesAvatar() {
-        $menssages = [];
-        $menssages["avatar.mimes"] = 'El avatar no tiene un formato válido.';
-        return $menssages;
+    protected function messagesAvatar() {
+        $messages = [];
+        $messages["avatar.mimes"] = 'El avatar no tiene un formato válido.';
+        return $messages;
     }
 
-    protected function menssagesPhone() {
-        $menssages = [];
+    protected function messagesPhone() {
+        $messages = [];
 
-        $menssages["phone.regex"] = "El número no tiene un formato válido";
-        return $menssages;
-
-    }
-
-    protected function menssagesWebsite() {
-        $menssages = [];
-
-        $menssages["website.url"] = "La página web no tiene un formato válido";
-        return $menssages;
+        $messages["phone.regex"] = "El número no tiene un formato válido";
+        return $messages;
 
     }
 
-    private function menssagesCurrentPassword() {
-        $menssages = [];
+    protected function messagesWebsite() {
+        $messages = [];
 
-        $menssages['current_password.required'] = 'El campo es requerido';
-        $menssages['current_password.string'] = 'El campo tiene que ser una cadena de texto';
-        $menssages['current_password.min'] = 'El campo tiene que tener mínimo 6 carácteres';
+        $messages["website.url"] = "La página web no tiene un formato válido";
+        return $messages;
 
-        return $menssages;
+    }
+
+    private function messagesCurrentPassword() {
+        $messages = [];
+
+        $messages['current_password.required'] = 'El campo es requerido';
+        $messages['current_password.string'] = 'El campo tiene que ser una cadena de texto';
+        $messages['current_password.min'] = 'El campo tiene que tener mínimo 6 carácteres';
+
+        return $messages;
     }
 
 
-    private function menssagesPassword() {
-        $menssages = [];
+    private function messagesPassword() {
+        $messages = [];
 
-        $menssages['password.required'] = 'El campo es requerido';
-        $menssages['password.string'] = 'El campo tiene que ser una cadena de texto';
-        $menssages['password.min'] = 'El campo tiene que tener mínimo 6 carácteres';
-        $menssages['password.confirmed'] = 'Las contraseñas no coinciden';
+        $messages['password.required'] = 'El campo es requerido';
+        $messages['password.string'] = 'El campo tiene que ser una cadena de texto';
+        $messages['password.min'] = 'El campo tiene que tener mínimo 6 carácteres';
+        $messages['password.confirmed'] = 'Las contraseñas no coinciden';
 
-        return $menssages;
+        return $messages;
+    }
+
+
+    protected function messagesName() {
+        $messages = array();
+        $messages["name.regex"] = 'El nombre sólo acepta letras y espacios';
+        $messages["name.max"] = 'Supera el máximo';
+        return $messages;
+    }
+
+    protected function messagesLastName() {
+        $messages = array();
+        $messages["lastName.regex"] = 'El apellido sólo acepta letras y espacios';
+        $messages["lastName.max"] = 'Supera el máximo';
+        return $messages;
+    }
+
+    protected function messagesEMail() {
+        $messages = array();
+        $messages["email.email"] = 'No es un email válido';
+        $messages["email.max"] = 'Supera el máximo';
+        $messages["email.unique"] = 'El email no está disponible';
+        return $messages;
     }
 }
