@@ -2,10 +2,11 @@
     "/js/filmGraph.js": "/js/filmGraph.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/js/modals.js": "/js/modals.js",
+    "/js/iziModal.min.js": "/js/iziModal.min.js",
     "/js/validateRegister.js": "/js/validateRegister.js",
     "/js/paginateReviews.js": "/js/paginateReviews.js",
     "/js/paginateIndex.js": "/js/paginateIndex.js",
-    "/js/modals.js": "/js/modals.js",
     "/js/contributeAutocomplete.js": "/js/contributeAutocomplete.js",
     "/css/iziModal.css": "/css/iziModal.css",
     "/css/all.css": "/css/all.css"

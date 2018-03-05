@@ -2,6 +2,7 @@
 
 @push('scripts')
     <link rel="stylesheet" href="{{asset('css/iziModal.css')}}">
+    <script src="{{asset('js/iziModal.min.js')}}" defer></script>
     <script src="{{asset('js/modals.js')}}" defer></script>
 
 @endpush
@@ -39,7 +40,11 @@
 
 
 
-    <div id="modal">
+    <div id="modal" class="modal">
         <div class="alert alert-danger"><Strong>Caution!</Strong> If you continue, you won't be able to get it back.</div>
+        <div class="row px-3">
+            <button class="col-md-6 btn btn-warning" id="cancel" data-izimodal-close="">Cancel</button>
+            <button class="col-md-6 btn btn-danger" id="continue">Continue</button>
+        </div>
     </div>
 @endsection
