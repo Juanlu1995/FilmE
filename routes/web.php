@@ -23,14 +23,24 @@ Route::get('/givemefilms/', 'PagesController@giveMeFilms'); //AJAX
 
 
 // Rutas usuario
-Route::get('/users/{username}', 'UsersController@show');
-Route::get('/profile', 'UsersController@profile')->middleware("auth");
+Route::get('show/{username}', 'UsersController@show');
+Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function (){
+    Route::get("","UsersController@profile");
+    Route::get('edit', 'UsersController@edit')->name('profile.data');
+    Route::get('edit/data', 'UsersController@edit')->name('profile.data');
+    Route::get('edit/password', 'UsersController@edit')->name('profile.password');
+    Route::get('edit/about', 'UsersController@edit')->name('profile.about');
+    Route::post('edit/', 'UsersController@update');
+    Route::post('edit/data', 'UsersController@update');
+    Route::post('edit/password', 'UsersController@update');
+    Route::post('edit/about', 'UsersController@update');
+});
 
 //Ruta contributes
 Route::group(['prefix' => 'contributes'], function () {
     Route::get('', 'ContributesController@index');
     Route::get('show/{slug}', 'ContributesController@show');
-    Route::get('autocomplete','ContributesController@autocompleteAJAX'); //AJAX
+    Route::get('autocomplete', 'ContributesController@autocompleteAJAX'); //AJAX
 });
 
 //Rutas reviews

@@ -17,7 +17,7 @@
             <div class="col-lg-4">
                 <h4>Date: {{ $film['date'] }}</h4>
                 <h4>Cuntry: {{ $film['country'] }}</h4>
-                <h4>Author: {{$film->user->name}}</h4>
+                <h4>Author: <a href="/users/show/{$film->user->username}}">{{$film->user->name}}</a></h4>
                 <h4>Duration: {{$film['duration']}}</h4>
                 <h2 class="text-danger">Rating: {{$film['rating']}}</h2>
             </div>

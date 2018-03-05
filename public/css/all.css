@@ -122,7 +122,6 @@
 /*
 Texto como footer en una imagen.
 */
-
 .imagebox {
     background: black;
     padding: 0px;
@@ -157,17 +156,42 @@ Texto como footer en una imagen.
     padding-bottom: 10%;
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+body::after{
+    content: '';
+    display: block;
+    height: 100px;
+}
+
+footer{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    height: 100px;
+}
 
 /*
 Carousels
 */
-#filmReviewsCarousel * img{
+#filmReviewsCarousel * img {
     height: 200px;
 }
-#filmActorsCarousel * img{
+
+#filmActorsCarousel * img {
     height: 200px;
     max-width: 400px;
 }
-#userCarousel * img{
-    height: 200px;
+
+#userCarousel * img {
+    height: 150px;
 }

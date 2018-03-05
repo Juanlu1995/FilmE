@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="ml-1">
                             <b> Author:
-                                <a href="/users/{{$film->user->username}}">{{ $film->user->name }}</a>
+                                <a href="/users/show/{{$film->user->username}}">{{ $film->user->name }}</a>
                             </b>
                         </div>
                     </div>
