@@ -26,7 +26,8 @@
             <strong>{{session('updated_success')}}</strong>
         </div>
     @endif
-    <form action="{{ Request::url() }}" method="post" {{ Route::currentRouteName() == 'profile.about' ? 'enctype="multipart/form-data"' : ''}}>
+    <form action="{{ Request::url() }}" method="POST" {{ Route::currentRouteName() == 'profile.about' ? 'enctype="multipart/form-data"' : ''}}>
+        {{method_field('PATCH')}}
         {{ csrf_field() }}
         @if(Route::currentRouteName() == 'profile.data')
             @include('users.partials.data')

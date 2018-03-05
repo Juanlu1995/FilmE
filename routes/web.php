@@ -23,17 +23,18 @@ Route::get('/givemefilms/', 'PagesController@giveMeFilms'); //AJAX
 
 
 // Rutas usuario
-Route::get('show/{username}', 'UsersController@show');
+Route::get('/users/show/{username}', 'UsersController@show');
 Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function (){
     Route::get("","UsersController@profile");
     Route::get('edit', 'UsersController@edit')->name('profile.data');
     Route::get('edit/data', 'UsersController@edit')->name('profile.data');
     Route::get('edit/password', 'UsersController@edit')->name('profile.password');
     Route::get('edit/about', 'UsersController@edit')->name('profile.about');
-    Route::post('edit/', 'UsersController@update');
-    Route::post('edit/data', 'UsersController@update');
-    Route::post('edit/password', 'UsersController@update');
-    Route::post('edit/about', 'UsersController@update');
+    Route::patch('edit/', 'UsersController@update');
+    Route::patch('edit/data', 'UsersController@update');
+    Route::patch('edit/password', 'UsersController@update');
+    Route::patch('edit/about', 'UsersController@update');
+    Route::delete('delete', 'UsersController@destroy');
 });
 
 //Ruta contributes
