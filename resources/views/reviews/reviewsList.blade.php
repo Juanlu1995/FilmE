@@ -2,7 +2,6 @@
     <div class="card-deck m-5">
 
         @foreach($row as $review)
-            {{--todo enlace a la review--}}
 
             <div class="card">
                 <div class="imagebox border border-dark">

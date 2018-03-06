@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="row mt-5 mx-5">
-            <h4>{{$review->content}}<h4>
+            <h4>{{$review->content}}</h4>
         </div>
     </div>
 @endsection
