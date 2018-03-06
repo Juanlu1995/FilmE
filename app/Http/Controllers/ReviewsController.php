@@ -27,9 +27,9 @@ class ReviewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Film $film)
     {
-        //
+        return view('reviews.create',['film' => $film]);
     }
 
     /**
@@ -108,7 +108,7 @@ class ReviewsController extends Controller
      * @return \Illuminate\Contracts\View\Factory|View
      */
     public function showUserReviews($username){
-        $user = User::where('username', $username)->first();
+        $user = User::where('username', $username)->firstOrFail();
 
         $reviews = $user->reviews()->paginate(9);
 

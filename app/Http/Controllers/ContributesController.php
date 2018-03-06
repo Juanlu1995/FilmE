@@ -44,7 +44,7 @@ class ContributesController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($slug) {
-        $contribute = Contribute::where('slug', $slug)->first();
+        $contribute = Contribute::where('slug', $slug)->firstOrFail();
 
         return view('contributes.show', ['contribute' => $contribute]);
     }

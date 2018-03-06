@@ -29,7 +29,7 @@ class UsersController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($username) {
-        $user = User::with('reviews')->where('username', $username)->firstOrFail();
+        $user = User::with('reviews.film')->where('username', $username)->firstOrFail();
 
 
 //        return view('users.show', ['user' => $user, 'reviews' => $reviews]);

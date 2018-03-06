@@ -32,11 +32,8 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function (){
     Route::get('edit/data', 'UsersController@edit')->name('profile.data');
     Route::get('edit/password', 'UsersController@edit')->name('profile.password');
     Route::get('edit/about', 'UsersController@edit')->name('profile.about');
-    Route::patch('edit/', 'UsersController@update');
-    Route::patch('edit/data', 'UsersController@update');
-    Route::patch('edit/password', 'UsersController@update');
-    Route::patch('edit/about', 'UsersController@update');
-    Route::delete('delete', 'UsersController@destroy');
+    Route::patch('', 'UsersController@update');
+    Route::delete('', 'UsersController@destroy');
 });
 
 //Ruta contributes
@@ -49,6 +46,7 @@ Route::group(['prefix' => 'contributes'], function () {
 //Rutas reviews
 Route::group(['prefix' => 'reviews'], function () {
     Route::get("", 'ReviewsController@index');
+    Route::get("create/{film}", 'ReviewsController@create');
     Route::get('show/{review}/', 'ReviewsController@show');
     Route::get('show/user/{username}/', 'ReviewsController@showUserReviews');
     Route::get('show/film/{film}/', 'ReviewsController@showFilmReviews');

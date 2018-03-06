@@ -8,14 +8,10 @@
         </h1>
 
     </div>
-    <div class="content">
-        @include('reviews.reviewsList')
-        <div class="offset-5">
-            {{$reviews->links("pagination::bootstrap-4")}}
-        </div>
-    </div>
 
-    <div class="offset-5">
+    @include('reviews.reviewsList')
+
+    <div class="offset-3">
         {{$reviews->links("pagination::bootstrap-4")}}
     </div>
 @endsection
