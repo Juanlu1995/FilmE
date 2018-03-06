@@ -46,7 +46,7 @@ class UsersController extends Controller {
      */
     public function profile(Request $request) {
         $user = $request->user();
-        $user = User::with('reviews')->findOrFail($user->id);
+        $user = User::with('reviews.film')->findOrFail($user->id);
 
         return view('users.profile', ['user' => $user]);
     }

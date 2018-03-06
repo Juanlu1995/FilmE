@@ -33,13 +33,14 @@
 
                     <div class="row">
                         <div class="ml-1">
-                            <b>Reviews: <a href="/reviews/show/film/{{$film->id}}">{{$film->getReviewsCount()}}</a></b>
+                            <b>Reviews: <a href="/reviews/show/film/{{$film->id}}">{{$film->reviews->count()}}</a></b>
+
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="ml-1">
-                            <b>Views: <span class="text-success">{{$film->getViewsCount()}}</span></b>
+                            <b>Views: <span class="text-success">{{$film->views->count()}}</span></b>
                         </div>
                     </div>
                 </div>
@@ -48,7 +49,7 @@
                         <h3 class="text-success">Synopsis</h3>
                     </div>
                     <div class="row mt-3">
-                        <p class="text-justify">{{ $film['synopsis'] }}</p>
+                        <p class="text-justify">{{ $film->synopsis }}</p>
                     </div>
                 </div>
             </div>
