@@ -51,7 +51,7 @@
 
         <div class="row m-3">
             <carousel id="filmReviewsCarousel" :autoplay="true" :navigation-enabled="true" :easing="'ease-out'"
-                      :scroll-per-page="true" pagination-color="#3CA4E3" :pagination-padding=6
+                      :scroll-per-page="true" pagination-color="#3CA4E3" :pagination-padding=6 :per-page="3"
                       class="my-3">
                 @foreach($film->reviews as $review)
                     <slide>

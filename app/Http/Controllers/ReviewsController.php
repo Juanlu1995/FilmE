@@ -20,7 +20,7 @@ class ReviewsController extends Controller
      */
     public function index()
     {
-        $reviews = Review::with('film')->orderBy('updated_at', 'desc')->paginate(9);
+        $reviews = Review::with(['film'])->orderBy('updated_at', 'desc')->paginate(9);
 
         return view('reviews.reviews', ['reviews' => $reviews]);
     }
@@ -82,8 +82,8 @@ class ReviewsController extends Controller
     {
         $film = Film::where('id', $review->film_id)->firstOrFail();
 
-
         return view('reviews.form', ['review' => $review, 'film' => $film]);
+
     }
 
     /**
