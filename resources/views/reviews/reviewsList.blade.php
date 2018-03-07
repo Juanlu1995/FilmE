@@ -5,7 +5,7 @@
 
             <div class="card">
                 <div class="imagebox border border-dark">
-                    <a href="/reviews/show/{{$review->id}}">
+                    <a href="/reviews/{{$review->id}}">
                         <img src="{{$review->film->cover}}" alt="{{$review->film->name}} cover" class="img-fluid">
                         <span class="imagebox-desc">{{$review->film->name}}</span>
                     </a>

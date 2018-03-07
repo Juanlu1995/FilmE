@@ -38,7 +38,7 @@
     @if($film->reviews->count() > 0)
         <div class="row my-3">
             <div class="text-center mt-3 ml-1 row">
-                <a href="/reviews/show/film/{{$film->id}}">
+                <a href="/reviews/film/{{$film->id}}">
                     <h2 class="border-bottom text-success">Reviews</h2>
                 </a>
                 @auth()
@@ -56,7 +56,7 @@
                 @foreach($film->reviews as $review)
                     <slide>
                         <div class="imagebox border border-dark">
-                            <a href="/reviews/show/{{$review->id}}">
+                            <a href="/reviews/{{$review->id}}">
                                 <img class="d-block" src="{{$review->user->avatar}}" alt="First slide">
                                 <span class="imagebox-desc">{{$review->user->name}}</span>
                             </a>

@@ -33,10 +33,10 @@
 
                     <div class="row">
                         <div class="ml-1">
-                            <a href="/reviews/show/film/{{$film->id}}" class="text-dark">
+                            <a href="/reviews/film/{{$film->id}}" class="text-dark">
 
                                 <b>Reviews:
-                                    <a href="/reviews/show/film/{{$film->id}}">{{$film->reviews->count()}}</a>
+                                    <a href="/reviews/film/{{$film->id}}">{{$film->reviews->count()}}</a>
                                 </b>
                             </a>
                         </div>

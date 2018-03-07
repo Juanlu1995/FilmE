@@ -55,7 +55,7 @@
             </div>
 
             <div class="row border-bottom">
-                <a href="/reviews/show/user/{{$user->username}}">
+                <a href="/reviews/user/{{$user->username}}">
                     <h3 class="text-primary">Reviews:</h3>
                 </a>
             </div>
@@ -65,7 +65,7 @@
                 @foreach($user->reviews as $review)
                     <slide>
                         <div class="imagebox border border-dark">
-                            <a href="/reviews/show/{{$review->id}}">
+                            <a href="/reviews/{{$review->id}}">
                                 <img class="d-block w-100 imageCarousel" src="{{$review->film->cover}}"
                                      alt="First slide">
                                 <span class="imagebox-desc">{{$review->film->name}}</span>
