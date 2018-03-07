@@ -16,7 +16,7 @@ Route::get('/', 'PagesController@index');
 Route::group(['prefix' => 'films'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('create', 'FilmsController@create')->middleware("auth");
-        Route::post('create', 'FilmsController@store')->middleware("auth");
+        Route::post('', 'FilmsController@store')->middleware("auth");
     });
     Route::get('show/{film}', 'FilmsController@show');
 });
@@ -52,6 +52,7 @@ Route::group(['prefix' => 'reviews'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get("create/{film}", 'ReviewsController@create')->name('reviews.create');
         Route::post("", 'ReviewsController@store');
+        Route::patch('{review}','ReviewsController@update');
         Route::get("{review}/edit", 'ReviewsController@edit')->name('reviews.edit');
     });
 });

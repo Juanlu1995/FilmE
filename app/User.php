@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Son los usuarios de nuestra aplicación
@@ -44,7 +45,5 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    public function itsMyReview(Review $review){
-       return $this->authorize('update', $review);
-    }
+
 }

@@ -9,7 +9,7 @@
 @endpush
 @section('content')
     <h1 class="">Create film</h1>
-    <form action="{{ url('/') }}/films/create" method="post"  enctype="multipart/form-data">
+    <form action="{{ url('/') }}/films" method="post"  enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <div class="form-group">

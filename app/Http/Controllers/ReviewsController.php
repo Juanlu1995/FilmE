@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Film;
 use App\Http\Requests\CreateReviewRequest;
+use App\Http\Requests\UpdateReviewRequest;
 use App\Review;
 use App\User;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class ReviewsController extends Controller
      */
     public function create(Film $film)
     {
-        return view('reviews.create', ['film' => $film]);
+        return view('reviews.form', ['film' => $film]);
     }
 
     /**
@@ -82,7 +83,7 @@ class ReviewsController extends Controller
         $film = Film::where('id', $review->film_id)->firstOrFail();
 
 
-        return view('reviews.create', ['review' => $review, 'film' => $film]);
+        return view('reviews.form', ['review' => $review, 'film' => $film]);
     }
 
     /**
@@ -92,9 +93,15 @@ class ReviewsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateReviewRequest $request, Review $review)
     {
-        //
+        $data = array_filter($request->all());
+
+        $review->fill($data);
+
+        $review->save();
+
+        return redirect('/reviews/'.$review->id)->with('updated_success', 'Los datos se han actualizado correctamente');
     }
 
     /**
