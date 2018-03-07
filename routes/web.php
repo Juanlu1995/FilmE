@@ -14,9 +14,9 @@ Route::get('/', 'PagesController@index');
 
 // Rutas de películas
 Route::group(['prefix' => 'films'], function () {
-    Route::group([ 'middleware' => 'auth'], function (){
+    Route::group(['middleware' => 'auth'], function () {
         Route::get('create', 'FilmsController@create')->middleware("auth");
-        Route::post('create', 'FilmsController@store')->middleware("auth");
+        Route::post('', 'FilmsController@store')->middleware("auth");
     });
     Route::get('show/{film}', 'FilmsController@show');
 });
@@ -26,8 +26,8 @@ Route::get('/givemefilms/', 'PagesController@giveMeFilms'); //AJAX
 
 // Rutas usuario
 Route::get('/users/show/{username}', 'UsersController@show');
-Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function (){
-    Route::get("","UsersController@profile");
+Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
+    Route::get("", "UsersController@profile");
     Route::get('edit', 'UsersController@edit')->name('profile.data');
     Route::get('edit/data', 'UsersController@edit')->name('profile.data');
     Route::get('edit/password', 'UsersController@edit')->name('profile.password');
@@ -46,10 +46,15 @@ Route::group(['prefix' => 'contributes'], function () {
 //Rutas reviews
 Route::group(['prefix' => 'reviews'], function () {
     Route::get("", 'ReviewsController@index');
-    Route::get("create/{film}", 'ReviewsController@create');
-    Route::get('show/{review}/', 'ReviewsController@show');
-    Route::get('show/user/{username}/', 'ReviewsController@showUserReviews');
-    Route::get('show/film/{film}/', 'ReviewsController@showFilmReviews');
+    Route::get('{review}/', 'ReviewsController@show');
+    Route::get('user/{username}/', 'ReviewsController@showUserReviews');
+    Route::get('film/{film}/', 'ReviewsController@showFilmReviews');
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get("create/{film}", 'ReviewsController@create')->name('reviews.create');
+        Route::post("", 'ReviewsController@store');
+        Route::patch('{review}','ReviewsController@update');
+        Route::get("{review}/edit", 'ReviewsController@edit')->name('reviews.edit');
+    });
 });
 //Ruta AJAX paginacion de reviews
 Route::get('/givemereviews/', 'ReviewsController@giveMeReviews'); //AJAX
