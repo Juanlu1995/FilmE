@@ -61,8 +61,6 @@ class Film extends Model {
         return $this->reviews()->count();
     }
 
-
-
     public function getCoverAttribute($cover){
         if( starts_with($cover, "https://")){
             return $cover;
@@ -70,4 +68,6 @@ class Film extends Model {
 
         return  Storage::disk('public')->url($cover);
     }
+
+
 }

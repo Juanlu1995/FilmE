@@ -36,4 +36,23 @@ class Contribute extends Model {
     public function getAge(){
         return Carbon::now()->diffInYears(Carbon::createFromFormat('Y-m-d',$this->birth_date));
     }
+
+    public static function extractOrCreateByName($contributesName){
+        $contributes = explode(",", $contributesName);
+        array_walk($contributes, function (&$contribute) {
+            $contribute = trim($contribute);
+        });
+
+
+        $contributes = array_diff($contributes, array(""));
+        array_walk($contributes, function (&$contribute) {
+            $contribute = trim($contribute);
+            $contribute = Contribute::firstOrCreate(['name' => $contribute]);
+        });
+
+
+        return $contributes;
+
+    }
+
 }

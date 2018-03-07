@@ -38,26 +38,9 @@ class FilmsController extends Controller {
     public function store(CreateFilmRequest $request) {
         $vacio = "Empty";
 
-        $actors = explode(",", $request->input('actors'));
-        array_walk($actors, function (&$actor) {
-            $actor = trim($actor);
-        });
-        $directors = explode(",", $request->input('directors'));
-        array_walk($directors, function (&$director) {
-            $director = trim($director);
-        });
+        $actors = Contribute::extractOrCreateByName($request->input('actors'));
 
-        $actors = array_diff($actors, array(""));
-        array_walk($actors, function (&$actor) {
-            $actor = trim($actor);
-            $actor = Contribute::firstOrCreate(['name' => $actor]);
-        });
-        $directors = array_diff($directors, array(""));
-        array_walk($directors, function (&$director) {
-            $director = trim($director);
-            $director = Contribute::firstOrCreate(['name' => $director]);
-        });
-
+        $directors = Contribute::extractOrCreateByName($request->input('directors'));
 
         if ($image = $request->file('cover')) {
             $url = $image->store('cover', 'public');
