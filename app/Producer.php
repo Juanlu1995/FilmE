@@ -15,6 +15,6 @@ class Producer extends Model
     protected $fillable = ['name'];
 
     public function film(){
-        return $this->belongsToMany(Film::class);
+        return $this->hasMany(Film::class);
     }
 }

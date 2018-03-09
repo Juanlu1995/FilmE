@@ -21,7 +21,7 @@ class Film extends Model {
     }
 
     public function categories() {
-        return $this->belongsToMany(Category::class, 'category_film','film_id','category_id');
+        return $this->belongsTo(Category::class);
     }
 
     public function actors() {
@@ -46,8 +46,8 @@ class Film extends Model {
         return $this->hasMany(View::class);
     }
 
-    public function producers() {
-        return $this->belongsToMany(Producer::class);
+    public function producer() {
+        return $this->belongsTo(Producer::class);
     }
 
     public function country(){

@@ -15,7 +15,7 @@
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text"
-                   name="name" id="name" class="form-control" placeholder="Name">
+                   name="name" id="name" class="form-control" placeholder="Name" value="{{old('name')}}">
         </div>
         @if($errors->has('name'))
             @foreach($errors->get('name') as $message)
@@ -26,7 +26,7 @@
         @endif
         <div class="form-group">
             <label for="synopsis">Synopsis</label>
-            <textarea id="synopsis" name="synopsis" class="form-control" placeholder="Synopsis"></textarea>
+            <textarea id="synopsis" name="synopsis" class="form-control" placeholder="Synopsis">{{old('synopsis')}}</textarea>
         </div>
 
 
@@ -49,7 +49,7 @@
                 <div class="form-group">
                     <label for="date">Date</label>
                     <input type="date"
-                           name="date" id="date" class="form-control" placeholder="Date">
+                           name="date" id="date" class="form-control" placeholder="Date" value="{{old('date')}}">
                 </div>
             </div>
             <div class="col-lg-4">
@@ -57,52 +57,68 @@
                 <div class="form-group">
                     <label for="duration">Duration</label>
                     <input type="number"
-                           name="duration" id="duration" class="form-control" placeholder="duration">
+                           name="duration" id="duration" class="form-control" placeholder="duration" value="{{old('duration')}}">
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="rating">Rating</label>
                     <input type="number"
-                           name="rating" id="rating" class="form-control" placeholder="Rating">
+                           name="rating" id="rating" class="form-control" placeholder="Rating" value="{{old('rating')}}">
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text"
-                   name="category" id="category" class="form-control" placeholder="Categorys">
-        </div>
+
         <div class="form-group">
             <label for="actors">Actors</label>
             <input type="text"
-                   name="actors" id="actors" class="form-control autoComplete" placeholder="Actors">
+                   name="actors" id="actors" class="form-control autoComplete" placeholder="Actors" value="{{old('actors')}}">
+        </div>
+        <div class="form-group">
+
+            <div class="form-group">
+                <label for="directors">Director</label>
+                <input type="text"
+                       name="directors" id="directors" class="form-control autoComplete" placeholder="Director" value="{{old('directors')}}">
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="directors">Director</label>
-                    <input type="text"
-                           name="directors" id="directors" class="form-control autoComplete" placeholder="Director">
-                </div>
+
+                <label for="category">Category</label>
+                <select name="category" id="category" class="custom-select">
+                    <option selected>Open this select menu</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="producer">Producer</label>
-                    <input type="text"
-                           name="producer" id="producer" class="form-control" placeholder="Producer">
+
+                    <select class="custom-select" name="producer" id="producer">
+                        <option selected>Open this select menu</option>
+                        @foreach($producers as $producer)
+                            <option value="{{$producer->id}}">{{$producer->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-lg-4">
 
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text"
-                           name="country" id="country" class="form-control" placeholder="Country">
+                    <select class="custom-select" name="country" id="country">
+                        <option selected>Open this select menu</option>
+                        @foreach($nationalities as $nationality)
+                            <option value="{{$nationality->id}}">{{$nationality->name}}</option>
+                        @endforeach
+                    </select>
+
                 </div>
             </div>
-
 
         </div>
         <input type="submit" class="btn btn-primary" value="Submit">

@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\actor;
+use App\Category;
 use App\Contribute;
 use App\Film;
 use App\Http\Requests\CreateFilmRequest;
+use App\Nationality;
+use App\Producer;
 use App\View;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Integer;
 
-class FilmsController extends Controller {
+class FilmsController extends Controller
+{
 
 
     /**
@@ -17,8 +22,16 @@ class FilmsController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        return view("films.create", []);
+    public function create()
+    {
+        $nationalities = Nationality::orderBy('name', 'desc')->get();
+        $producers = Producer::orderBy('name', 'desc')->get();
+        $categories = Category::orderBy('name', 'desc')->get();
+        return view("films.create", [
+            'nationalities' => $nationalities,
+            'producers' => $producers,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -30,17 +43,18 @@ class FilmsController extends Controller {
      * Comprobamos el formato de la imagen (si es un url o un archivo) y lo guardamos.
      * Creamos la película y le damos la lista de actores y directores a la película.
      *
-     * TODO nacionalidad y productores
-     *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateFilmRequest $request) {
+    public function store(CreateFilmRequest $request)
+    {
         $vacio = "Empty";
 
         $actors = Contribute::extractOrCreateByName($request->input('actors'));
 
         $directors = Contribute::extractOrCreateByName($request->input('directors'));
+
+        $producer = Producer::findOrFail($request->input('producer'));
 
         if ($image = $request->file('cover')) {
             $url = $image->store('cover', 'public');
@@ -55,20 +69,21 @@ class FilmsController extends Controller {
             'cover' => $url,
             'date' => $request->input('date'),
             'duration' => $request->input('duration') ?: "0",
-            //todo Implementar category y productores.
+            'category_id' => $request->input('category') ?: "0",
             'rating' => $request->input('rating') ?: "0",
-            //todo Que la nacionalidad, si no existe una real, sea el valor 1 = none;
             'nationality_id' => $request->input('country') ?: 1,
-
+            'producer_id' => $producer->id ?: 1
         ]);
 
 
         foreach ($actors as $actor) {
             $film->actors()->attach($actor);
         }
-        foreach ($directors as $director){
+        foreach ($directors as $director) {
             $film->directors()->attach($director);
         }
+
+        dd($film->producer->name);
 
         return redirect('/films/show/' . $film->id);
     }
@@ -82,7 +97,8 @@ class FilmsController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Film $film, Request $request) {
+    public function show(Film $film, Request $request)
+    {
 
         if ($film) {
             View::create([
@@ -102,7 +118,8 @@ class FilmsController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         //
     }
 
@@ -113,7 +130,8 @@ class FilmsController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         //
     }
 
@@ -123,7 +141,8 @@ class FilmsController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
     }
 }
