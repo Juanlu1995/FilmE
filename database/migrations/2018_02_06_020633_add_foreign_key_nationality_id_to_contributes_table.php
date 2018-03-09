@@ -14,7 +14,7 @@ class AddForeignKeyNationalityIdToContributesTable extends Migration
     public function up()
     {
         Schema::table('contributes', function (Blueprint $table) {
-            $table->integer('nationality_id')->unsigned()->nullable();
+            $table->integer('nationality_id')->unsigned()->default('1');
             $table->foreign('nationality_id')->references('id')->on('nationalities');
         });
     }

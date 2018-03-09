@@ -32,7 +32,6 @@ class UsersController extends Controller {
         $user = User::with('reviews.film')->where('username', $username)->firstOrFail();
 
 
-//        return view('users.show', ['user' => $user, 'reviews' => $reviews]);
         return view('users.show', ['user' => $user]);
 
     }

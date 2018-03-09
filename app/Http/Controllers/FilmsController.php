@@ -91,7 +91,6 @@ class FilmsController extends Controller {
                 'ip' => $request->ip(),
             ]);
         }
-        $film = $film->with(['actors','directors'])->firstOrFail();
         return view('films.show', [
             "film" => $film
         ]);

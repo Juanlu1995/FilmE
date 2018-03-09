@@ -12,7 +12,7 @@
         </div>
         <div class="col-lg-8">
             <div class="row my-3">
-                <h1 class="text-primary">{{$film['name']}}</h1>
+                <h1 class="text-primary">{{$film->name}}</h1>
             </div>
             <div class="col-lg-4">
                 <h4>Date: {{ $film['date'] }}</h4>

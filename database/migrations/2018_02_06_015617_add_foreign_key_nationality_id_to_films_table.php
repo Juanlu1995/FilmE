@@ -14,7 +14,7 @@ class AddForeignKeyNationalityIdToFilmsTable extends Migration
     public function up()
     {
         Schema::table('films', function (Blueprint $table) {
-            $table->integer('nationality_id')->unsigned();
+            $table->integer('nationality_id')->unsigned()->default('1');
             $table->foreign('nationality_id')->references('id')->on('nationalities');
         });
     }

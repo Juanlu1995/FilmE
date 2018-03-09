@@ -17,6 +17,7 @@ $factory->define(App\Contribute::class, function (Faker $faker) {
     $slug = str_slug($name . "-" . $lastName, "-");
     return [
         'name' => $name,
+        'slug' => $slug,
         'photo' => $image,
         'birth_date' => Carbon::createFromTimestamp($faker->dateTimeBetween("-90 years", Carbon::now()->getTimestamp())->getTimestamp())->toDateString(),
         'created_at' => ($time1 < $time2) ? $time1 : $time2,

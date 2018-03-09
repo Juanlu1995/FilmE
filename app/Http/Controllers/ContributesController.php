@@ -45,7 +45,6 @@ class ContributesController extends Controller {
      */
     public function show($slug) {
         $contribute = Contribute::where('slug', $slug)->firstOrFail();
-
         return view('contributes.show', ['contribute' => $contribute]);
     }
 

@@ -50,6 +50,48 @@ class UpdateReviewRequest extends FormRequest
     }
 
     public function messages() {
-        return parent::messages();
+        $menssagesTitle = $this->messagesTitle();
+        $menssagesRating = $this->messagesRating();
+        $menssagesContent = $this->messagesContent();
+
+        return array_merge($menssagesTitle,$menssagesContent,$menssagesRating);
     }
+
+
+
+    /**
+     * @return array de los mensajes de eror
+     */
+    protected function messagesRating() {
+        $messages = [];
+        $messages["rating.integer"] = 'El rating debe de ser numérico.';
+        $messages["rating.max"] = 'El rating debe de ser máximo 100.';
+        $messages["rating.min"] = 'El rating debe de ser mínimo 0.';
+
+        return $messages;
+    }
+
+    /**
+     * @return array de los mensajes de eror
+     */
+    protected function messagesTitle() {
+        $messages = [];
+        $messages["title.string"] = "El titulo no tiene un formato válido";
+        $messages["title.max"] = "El titulo no puede tener más de 255 caracteres";
+
+        return $messages;
+
+    }
+
+    /**
+     * @return array de los mensajes de eror
+     */
+    protected function messagesContent() {
+        $messages = [];
+        $messages["content.string"] = "El contenido no tiene un formato válido.";
+        $messages["content.min"] = "El contenido no puede tener menos de 200 caracteres.";
+        return $messages;
+
+    }
+
 }

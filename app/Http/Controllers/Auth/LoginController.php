@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\UserLoggedIn;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -39,7 +42,16 @@ class LoginController extends Controller
     }
 
     protected function authenticated(Request $request, $user) {
+
+        $user = Auth::user();
+        //31 es el usuario que he creado con el correo mio para que me notifique a mi correo.
+        $admin = User::find(31);
+
+        $admin->notify(new UserLoggedIn($user));
+
         return redirect('/profile');
+
+
     }
 
 

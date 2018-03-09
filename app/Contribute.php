@@ -47,7 +47,7 @@ class Contribute extends Model {
         $contributes = array_diff($contributes, array(""));
         array_walk($contributes, function (&$contribute) {
             $contribute = trim($contribute);
-            $contribute = Contribute::firstOrCreate(['name' => $contribute]);
+            $contribute = Contribute::firstOrCreate(['name' => $contribute, 'slug' => str_slug($contribute, '-')]);
         });
 
 
