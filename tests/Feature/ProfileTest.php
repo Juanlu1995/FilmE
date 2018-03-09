@@ -1,0 +1,98 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class ProfileTest extends TestCase
+{
+   use DatabaseTransactions;
+
+    private function crearUsuarioYLogueo(){
+        $user = Factory(User::class)->create();
+        $this->post('/login', ['email' => $user->mail, 'password' => $user->password]);
+
+        return $user;
+    }
+
+    /**
+     * Accedemos a la página de perfil
+     *
+     * GET /profile
+     */
+    public function testShowProfile()
+    {
+        $user = $this->crearUsuarioYLogueo();
+
+        $response = $this->actingAs($user)->get('/profile');
+
+        $response->assertStatus(200);
+        $response->assertSee($user->name);
+    }
+
+    /**
+     * Accedemos a la página edicion del perfil
+     *
+     * GET /profile/edit
+     */
+    public function testShowEditProfile(){
+        $user = $this->crearUsuarioYLogueo();
+
+        $response = $this->actingAs($user)->get('/profile/edit');
+
+        $response->assertStatus(200);
+        $response->assertSee('name');
+        $response->assertDontSee('Password Confirmation');
+    }
+
+    /**
+     * Accedemos a la página edicion del perfil de datos
+     *
+     * GET /profile/edit/data
+     */
+    public function testShowEditDataProfile(){
+        $user = $this->crearUsuarioYLogueo();
+
+        $response = $this->actingAs($user)->get('/profile/edit/data');
+
+        $response->assertStatus(200);
+        $response->assertSee('name');
+        $response->assertDontSee('Password Confirmation');
+    }
+
+
+    /**
+     * Accedemos a la página edicion del perfil de contraseña
+     *
+     * GET /profile/edit/password
+     */
+    public function testShowEditPasswordProfile(){
+        $user = $this->crearUsuarioYLogueo();
+
+        $response = $this->actingAs($user)->get('/profile/edit/password');
+
+        $response->assertStatus(200);
+        $response->assertSee('Password Confirmation');
+        $response->assertDontSee('username');
+    }
+
+    /**
+     * Accedemos a la página edicion del perfil de "sobre mi
+     *
+     * GET /profile/edit/about
+     */
+    public function testShowEditAboutProfile(){
+        $user = $this->crearUsuarioYLogueo();
+
+        $response = $this->actingAs($user)->get('/profile/edit/about');
+
+        $response->assertStatus(200);
+        $response->assertSee('phone');
+        $response->assertDontSee('Password Confirmation');
+    }
+//todo patch y delete
+}

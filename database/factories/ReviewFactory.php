@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Review::class, function (Faker $faker) {
     return [
         'title' => implode($faker->words(5), " "),
-        'content' => $faker->text(300),
+        'content' => $faker->text(500),
         'rating' => $faker->numberBetween(0,100),
     ];
 });

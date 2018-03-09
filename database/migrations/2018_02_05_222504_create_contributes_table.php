@@ -16,6 +16,7 @@ class CreateContributesTable extends Migration
         Schema::create('contributes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('slug');
             $table->string('photo')->default("https://cdn4.iconfinder.com/data/icons/awards-5/154/oscar-round-award-512.png");
             $table->date('birth_date')->nullable();
             $table->timestamps();
