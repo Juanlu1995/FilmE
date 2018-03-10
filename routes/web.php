@@ -66,6 +66,12 @@ Route::get('/views/film/', 'ViewsController@getFilmViews'); //AJAX
 // Ruta AJAX validación registro de usuario
 Route::post('/register/validate', 'Auth\RegisterController@validateAJAX')->middleware('guest'); //AJAX
 
+Route::group(['prefix' => 'users-see', 'middleware' => 'auth'], function (){
+    Route::post('{film}', 'UsersController@userSee');
+    Route::delete('{film}', 'UsersController@userNotSee');
+});
+
+
 Auth::routes();
 
 //Route::get('/', 'HomeController@index')->name('home');

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Film;
+use App\Policies\FilmsPolicies;
 use App\Policies\ReviewPolicies;
 use App\Review;
 use Illuminate\Support\Facades\Gate;
@@ -16,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        Review::class => ReviewPolicies::class
+        Review::class => ReviewPolicies::class,
     ];
 
     /**

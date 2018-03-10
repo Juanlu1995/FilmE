@@ -80,6 +80,9 @@ class ReviewsController extends Controller
      */
     public function edit(Review $review)
     {
+        if (!Auth::user()->can('update', $review)){
+            return redirect()->back();
+        }
         $film = Film::where('id', $review->film_id)->firstOrFail();
 
         return view('reviews.form', ['review' => $review, 'film' => $film]);

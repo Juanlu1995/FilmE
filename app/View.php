@@ -16,4 +16,5 @@ class View extends Model {
     public function film() {
         return $this->belongsTo(Film::class);
     }
+
 }
