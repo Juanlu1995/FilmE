@@ -12,7 +12,7 @@ class ProfileTest extends TestCase
 {
    use DatabaseTransactions;
 
-    private function crearUsuarioYLogueo(){
+    private function createUserAndLogin(){
         $user = Factory(User::class)->create();
         $this->post('/login', ['email' => $user->mail, 'password' => $user->password]);
 
@@ -26,7 +26,7 @@ class ProfileTest extends TestCase
      */
     public function testShowProfile()
     {
-        $user = $this->crearUsuarioYLogueo();
+        $user = $this->createUserAndLogin();
 
         $response = $this->actingAs($user)->get('/profile');
 
@@ -40,7 +40,7 @@ class ProfileTest extends TestCase
      * GET /profile/edit
      */
     public function testShowEditProfile(){
-        $user = $this->crearUsuarioYLogueo();
+        $user = $this->createUserAndLogin();
 
         $response = $this->actingAs($user)->get('/profile/edit');
 
@@ -55,7 +55,7 @@ class ProfileTest extends TestCase
      * GET /profile/edit/data
      */
     public function testShowEditDataProfile(){
-        $user = $this->crearUsuarioYLogueo();
+        $user = $this->createUserAndLogin();
 
         $response = $this->actingAs($user)->get('/profile/edit/data');
 
@@ -71,7 +71,7 @@ class ProfileTest extends TestCase
      * GET /profile/edit/password
      */
     public function testShowEditPasswordProfile(){
-        $user = $this->crearUsuarioYLogueo();
+        $user = $this->createUserAndLogin();
 
         $response = $this->actingAs($user)->get('/profile/edit/password');
 
@@ -86,7 +86,7 @@ class ProfileTest extends TestCase
      * GET /profile/edit/about
      */
     public function testShowEditAboutProfile(){
-        $user = $this->crearUsuarioYLogueo();
+        $user = $this->createUserAndLogin();
 
         $response = $this->actingAs($user)->get('/profile/edit/about');
 
@@ -94,5 +94,14 @@ class ProfileTest extends TestCase
         $response->assertSee('phone');
         $response->assertDontSee('Password Confirmation');
     }
-//todo patch y delete
+
+
+    public function testDeleteUser(){
+        $user = $this->createUserAndLogin();
+
+        $response = $this->actingAs($user)->delete('/profile');
+
+        $response->assertStatus(302);
+        $this->assertSoftDeleted('users', ['name' => $user->name]);
+    }
 }

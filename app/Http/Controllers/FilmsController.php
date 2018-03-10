@@ -83,8 +83,6 @@ class FilmsController extends Controller
             $film->directors()->attach($director);
         }
 
-        dd($film->producer->name);
-
         return redirect('/films/show/' . $film->id);
     }
 

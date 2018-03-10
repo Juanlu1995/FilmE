@@ -14,7 +14,7 @@ class AddProducerIdToFilmsTable extends Migration
     public function up()
     {
         Schema::table('films', function (Blueprint $table) {
-            $table->integer('producer_id')->unsigned()->nullable();
+            $table->integer('producer_id')->unsigned()->default(1)->nullable();
             $table->foreign('producer_id')->references('id')->on('producers');
         });
     }

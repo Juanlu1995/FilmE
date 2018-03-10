@@ -14,15 +14,17 @@ class DatabaseSeeder extends Seeder
 
         $users = factory(App\User::class, 20)->create();
 
-
+        $nationalityNone = factory(App\Nationality::class)->create(['name' => 'none']);
         $nationalities = factory(App\Nationality::class, 10)->create();
+        $nationalities->push($nationalityNone);
 
-
+        $producerNone = factory(\App\Producer::class)->create(['name' => 'none']);
         $producers = factory(\App\Producer::class, 10)->create();
+        $producers->push($producerNone);
 
-
+        $categoryNone = factory(\App\Category::class)->create(['name' => 'none']);
         $categories = factory(\App\Category::class, 10)->create();
-
+        $categories->push($categoryNone);
 
         $nationalities->each(function (App\Nationality $nationality) use ($nationalities, $users, $categories, $producers) {
             $contributes = factory(\App\Contribute::class, 20)->create([

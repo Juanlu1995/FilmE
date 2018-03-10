@@ -88,9 +88,8 @@
 
                 <label for="category">Category</label>
                 <select name="category" id="category" class="custom-select">
-                    <option selected>Open this select menu</option>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option value="{{$category->id}}" @if($category->name == 'none') selected @endif >{{$category->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -99,9 +98,8 @@
                     <label for="producer">Producer</label>
 
                     <select class="custom-select" name="producer" id="producer">
-                        <option selected>Open this select menu</option>
                         @foreach($producers as $producer)
-                            <option value="{{$producer->id}}">{{$producer->name}}</option>
+                            <option value="{{$producer->id}}" @if($producer->name == 'none') selected @endif>{{$producer->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -111,9 +109,8 @@
                 <div class="form-group">
                     <label for="country">Country</label>
                     <select class="custom-select" name="country" id="country">
-                        <option selected>Open this select menu</option>
                         @foreach($nationalities as $nationality)
-                            <option value="{{$nationality->id}}">{{$nationality->name}}</option>
+                            <option value="{{$nationality->id}}" @if($nationality->name == 'none') selected @endif>{{$nationality->name}}</option>
                         @endforeach
                     </select>
 
