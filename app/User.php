@@ -45,4 +45,9 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+
+    public function filmsSee(){
+        return $this->belongsToMany(Film::class, 'users_see', 'user_id', 'film_id');
+    }
+
 }

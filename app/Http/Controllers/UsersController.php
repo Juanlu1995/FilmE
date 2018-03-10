@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Film;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
@@ -114,5 +115,31 @@ class UsersController extends Controller {
         $this->user->delete();
 
         return redirect('/');
+    }
+
+
+    /**
+     * Hacemos que un usuario tenga marcada una película vista
+     *
+     * @param Film $film
+     */
+    public function userSee(Film $film){
+        $user = User::findOrFail($this->user->id);
+        $user->filmsSee()->attach($film);
+
+        return redirect()->back();
+    }
+
+
+    /**
+     * Hacemos que un usuario desmaque una pelicula que haya visto
+     *
+     * @param Film $film
+     */
+    public function userNotSee(Film $film){
+        $user = User::findOrFail($this->user->id);
+        $user->filmsSee()->detach($film);
+
+        return redirect()->back();
     }
 }

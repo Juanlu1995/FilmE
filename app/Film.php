@@ -69,5 +69,9 @@ class Film extends Model {
         return  Storage::disk('public')->url($cover);
     }
 
+    public function usersSee(){
+        return $this->belongsToMany(User::class,'users_see','film_id','user_id');
+    }
+
 
 }
