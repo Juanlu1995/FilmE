@@ -14,7 +14,7 @@ class AddCategoryIdToFilmsTable extends Migration
     public function up()
     {
         Schema::table('films', function (Blueprint $table) {
-            $table->integer('category_id')->unsigned()->nullable();
+            $table->integer('category_id')->unsigned()->default(1)->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }
