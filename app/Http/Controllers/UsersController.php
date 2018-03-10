@@ -123,8 +123,13 @@ class UsersController extends Controller {
      *
      * @param Film $film
      */
-    public function userSee(Film $film){
+    public function userSee(Film $film) {
         $user = User::findOrFail($this->user->id);
+
+        if ($user->seeFilm($film)){
+            return redirect()->back();
+        }
+
         $user->filmsSee()->attach($film);
 
         return redirect()->back();
@@ -136,8 +141,13 @@ class UsersController extends Controller {
      *
      * @param Film $film
      */
-    public function userNotSee(Film $film){
+    public function userNotSee(Film $film) {
         $user = User::findOrFail($this->user->id);
+
+        if (! $user->seeFilm($film)){
+            return redirect()->back();
+        }
+
         $user->filmsSee()->detach($film);
 
         return redirect()->back();

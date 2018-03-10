@@ -50,4 +50,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Film::class, 'users_see', 'user_id', 'film_id');
     }
 
+
+    public function seeFilm(Film $film){
+        return $this->filmsSee->contains($film);
+    }
 }
