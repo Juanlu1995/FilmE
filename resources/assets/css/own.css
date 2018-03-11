@@ -66,9 +66,11 @@ Carousels
     height: 200px;
 }
 
-#filmActorsCarousel * img {
+.filmContributesCarousel * img {
     height: 200px;
-    max-width: 400px;
+}
+.VueCarousel-slide{
+    max-width: 200px;
 }
 
 #userCarousel * img {

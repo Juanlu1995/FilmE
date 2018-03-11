@@ -47,6 +47,67 @@
     </div>
 
 
+
+    @if($film->actors->count() > 0)
+        <div class="row my-3">
+            <div class="text-center mt-3 ml-1 row">
+                <a href="/contributes/film/show/{{$film->id}}">
+                    {{--todo enlace a los contributes de una película--}}
+                    <h2 class="border-bottom text-success">Actors</h2>
+                </a>
+            </div>
+        </div>
+
+        <div class="row m-3">
+            <carousel id="filmContributesCarousel" :autoplay="true" :navigation-enabled="true" :easing="'ease-out'"
+                      :scroll-per-page="true" pagination-color="#3CA4E3" :pagination-padding=6 :per-page="3"
+                      class="my-3">
+                @foreach($film->actors as $actor)
+                    <slide>
+                        <div class="imagebox border border-dark">
+                            <a href="/contributes/show/{{$actor->slug}}">
+                                <img class="d-block" src="{{$actor->photo}}" alt="First slide">
+                                <span class="imagebox-desc">{{$actor->name}}</span>
+                            </a>
+                        </div>
+                    </slide>
+                @endforeach
+            </carousel>
+        </div>
+    @endif
+    @if($film->directors->count() > 0)
+        <div class="row my-3">
+            <div class="text-center mt-3 ml-1 row">
+                <a href="/contributes/film/show/{{$film->id}}">
+                    {{--todo enlace a los contributes de una película--}}
+                    <h2 class="border-bottom text-success">Directors</h2>
+                </a>
+            </div>
+        </div>
+
+        <div class="row m-3">
+            <carousel id="filmContributesCarousel" :autoplay="true" :navigation-enabled="true" :easing="'ease-out'"
+                      :scroll-per-page="true" pagination-color="#3CA4E3" :pagination-padding=6 :per-page="3"
+                      class="my-3">
+                @foreach($film->directors as $director)
+                    <slide>
+                        <div class="imagebox border border-dark">
+                            <a href="/contributes/show/{{$director->slug}}">
+                                <img class="d-block" src="{{$director->photo}}" alt="First slide">
+                                <span class="imagebox-desc">{{$director->name}}</span>
+                            </a>
+                        </div>
+                    </slide>
+                @endforeach
+            </carousel>
+        </div>
+    @endif
+
+
+
+
+
+
     @if($film->reviews->count() > 0)
         <div class="row my-3">
             <div class="text-center mt-3 ml-1 row">

@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Contribute;
+use App\Film;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ContributesController extends Controller {
+class ContributesController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $contributes = Contribute::orderBy('updated_at', 'desc')->paginate(9);
 
         return view('contributes.listContributes', ['contributes' => $contributes]);
@@ -23,7 +26,8 @@ class ContributesController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         //
     }
 
@@ -33,7 +37,8 @@ class ContributesController extends Controller {
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         //
     }
 
@@ -43,9 +48,16 @@ class ContributesController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug) {
+    public function show($slug)
+    {
         $contribute = Contribute::where('slug', $slug)->firstOrFail();
         return view('contributes.show', ['contribute' => $contribute]);
+    }
+
+    public function showFilmContributes(Film $film)
+    {
+        $filmWithContributes = Film::with('actors','directors')->where(['id' =>$film->id])->firstOrFail();
+        return view('contributes.filmContributesList', ['film'=>$filmWithContributes]);
     }
 
     /**
@@ -54,7 +66,8 @@ class ContributesController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         //
     }
 
@@ -65,7 +78,8 @@ class ContributesController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         //
     }
 
@@ -75,7 +89,8 @@ class ContributesController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         //
     }
 
@@ -85,7 +100,8 @@ class ContributesController extends Controller {
      * @param Request $request
      * @return JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function autocompleteAJAX(Request $request) {
+    public function autocompleteAJAX(Request $request)
+    {
         if ($request->ajax()) {
 
             $contributes = Contribute::all()->pluck('name');

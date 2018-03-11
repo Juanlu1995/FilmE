@@ -39,6 +39,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function () {
 //Ruta contributes
 Route::group(['prefix' => 'contributes'], function () {
     Route::get('', 'ContributesController@index');
+    Route::get('film/show/{film}','ContributesController@showFilmContributes');
     Route::get('show/{slug}', 'ContributesController@show');
     Route::get('autocomplete', 'ContributesController@autocompleteAJAX'); //AJAX
 });

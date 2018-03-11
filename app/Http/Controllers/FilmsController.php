@@ -97,6 +97,7 @@ class FilmsController extends Controller
      */
     public function show(Film $film, Request $request)
     {
+        $film = Film::with('actors','directors')->where(['id' => $film->id])->firstOrFail();
 
         if ($film) {
             View::create([
