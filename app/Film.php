@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Storage;
  * @package App
  */
 class Film extends Model {
+
+
+    use SoftDeletes;
+
+
     // Hacemos esto para que los campos dados no se pueden dar programáticamente.
     // views_counted se podrá poner programáticamente por si se hacen "trampas" al orden de las películas más interesadas actualmente.
     protected $guarded = ["id", "reviews_counted", "created_at", "updated_at",];
@@ -50,7 +56,7 @@ class Film extends Model {
         return $this->belongsTo(Producer::class);
     }
 
-    public function country(){
+    public function nationality(){
         return $this->belongsTo(Nationality::class);
     }
 

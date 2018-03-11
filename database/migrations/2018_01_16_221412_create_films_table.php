@@ -21,6 +21,7 @@ class CreateFilmsTable extends Migration
             $table->date('date')->nullable();
             $table->string('duration');
             $table->integer("rating");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

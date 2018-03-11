@@ -15,8 +15,11 @@ Route::get('/', 'PagesController@index');
 // Rutas de películas
 Route::group(['prefix' => 'films'], function () {
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('create', 'FilmsController@create')->middleware("auth");
-        Route::post('', 'FilmsController@store')->middleware("auth");
+        Route::get('create', 'FilmsController@create');
+        Route::post('', 'FilmsController@store')->name('film.edit');
+        Route::get('edit/{film}', 'FilmsController@edit');
+        Route::patch('{film}', 'FilmsController@update');
+        Route::delete('{film}', 'FilmsController@destroy');
     });
     Route::get('show/{film}', 'FilmsController@show');
 });

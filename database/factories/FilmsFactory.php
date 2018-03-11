@@ -13,7 +13,7 @@ $factory->define(\App\Film::class, function (Faker $faker) {
 
 
     return [
-        'name' => $faker->unique()->name,
+        'name' => $faker->unique()->text(20),
         'synopsis' => $faker->text(400),
         'cover' => $image,
         'date' => Carbon::createFromTimestamp($faker->dateTimeBetween("-193 years", Carbon::now()->getTimestamp())->getTimestamp())->toDateString(),

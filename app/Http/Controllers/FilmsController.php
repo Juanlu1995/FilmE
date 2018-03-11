@@ -8,9 +8,11 @@ use App\Contribute;
 use App\Film;
 use App\Http\Requests\CreateFilmRequest;
 use App\Nationality;
+use App\Policies\FilmsPolicies;
 use App\Producer;
 use App\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Integer;
 
 class FilmsController extends Controller
@@ -27,7 +29,7 @@ class FilmsController extends Controller
         $nationalities = Nationality::orderBy('name', 'desc')->get();
         $producers = Producer::orderBy('name', 'desc')->get();
         $categories = Category::orderBy('name', 'desc')->get();
-        return view("films.create", [
+        return view("films.form", [
             'nationalities' => $nationalities,
             'producers' => $producers,
             'categories' => $categories
@@ -71,7 +73,7 @@ class FilmsController extends Controller
             'duration' => $request->input('duration') ?: "0",
             'category_id' => $request->input('category') ?: "0",
             'rating' => $request->input('rating') ?: "0",
-            'nationality_id' => $request->input('country') ?: 1,
+            'nationality_id' => $request->input('nationality') ?: 1,
             'producer_id' => $producer->id ?: 1
         ]);
 
@@ -97,7 +99,7 @@ class FilmsController extends Controller
      */
     public function show(Film $film, Request $request)
     {
-        $film = Film::with('actors','directors')->where(['id' => $film->id])->firstOrFail();
+        $film = Film::with('actors', 'directors')->where(['id' => $film->id])->firstOrFail();
 
         if ($film) {
             View::create([
@@ -117,31 +119,84 @@ class FilmsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Film $film)
     {
-        //
+        $nationalities = Nationality::orderBy('name', 'desc')->get();
+        $producers = Producer::orderBy('name', 'desc')->get();
+        $categories = Category::orderBy('name', 'desc')->get();
+
+        return view('films.form', [
+            'film' => $film,
+            'nationalities' => $nationalities,
+            'producers' => $producers,
+            'categories' => $categories]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  Film $film
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateFilmRequest $request, Film $film)
     {
-        //
+
+        if (Auth::user()->can('update', $film)) {
+
+            $name = $request->input('name');
+            $synopsis = $request->input('synopsis');
+            if ($request->has('cover')) {
+                if ($cover = $request->file('cover')) {
+                    $url = $cover->store('cover', 'public');
+                } else {
+                    $url = "https://picsum.photos/800/600/?" . mt_rand(1, 1000);
+                }
+            }
+            if ($request->has('date')) {
+                $date = $request->input('date');
+            }
+            if ($request->has('duration')) {
+                $duration = $request->input('duration');
+            }
+            if ($request->has('rating')) {
+                $rating = $request->input('rating');
+            }
+
+            $nationality = $request->input('nationality');
+            $producer = $request->input('producer');
+            $category = $request->input('category');
+
+            $film->name = $name;
+            $film->synopsis = $synopsis;
+            $film->cover = isset($url) ? $url : 'https://picsum.photos/800/600?image=' . mt_rand(0, 1000);
+            $film->date = $date;
+            $film->duration = $duration;
+            $film->rating = $rating;
+            $film->nationality_id = $nationality;
+            $film->producer_id = $producer;
+            $film->category_id = $category;
+
+            $film->save();
+
+
+            return redirect('/films/show/' . $film->id);
+
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  Film $film
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Film $film)
     {
-        //
+        $film->delete();
+
+        return redirect('/');
     }
 }
