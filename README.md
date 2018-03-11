@@ -23,3 +23,5 @@ Una vez hecho esto, tenemos que crear un archivo .env con el modelo del archivo 
 9. `DB_PASSWORD`, la contraseña de la base de datos.
 
 Una vez hecho esto tenemos que crear la base de datos con el nombre que le hemos dado en `DB_DATABASE` del .env y creamos sus tablas posicionandomos en la raiz del proyecto y ejecutando `php artisan migrate` o si queremos tener datos de pruba ejecutamos `php artisan migrate:refresh --seed`.
+
+Para poder acceder publicamente a las imagenes que subimos mediante la aplicación tenemos que crear un [enlace blando](http://gestiondigitalweb.com/como-crear-un-enlace-simbolico-en-linux/) desde `storage/app/public/` a `public`.
