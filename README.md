@@ -22,4 +22,4 @@ Una vez hecho esto, tenemos que crear un archivo .env con el modelo del archivo 
 8. `DB_USERNAME`, el usuario de la base de datos.
 9. `DB_PASSWORD`, la contraseña de la base de datos.
 
-Una vez hecho esto tenemos que crear la base de datos con el nombre que le hemos dado en DB_DATABASE del .env y creamos sus tablas posicionandomos en la raiz del proyecto y ejecutando `php artisan migrate` o si queremos tener datos de pruba ejecutamos `php artisan migrate:refresh --seed`.
+Una vez hecho esto tenemos que crear la base de datos con el nombre que le hemos dado en `DB_DATABASE` del .env y creamos sus tablas posicionandomos en la raiz del proyecto y ejecutando `php artisan migrate` o si queremos tener datos de pruba ejecutamos `php artisan migrate:refresh --seed`.
