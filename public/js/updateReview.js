@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 355);
+/******/ 	return __webpack_require__(__webpack_require__.s = 357);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11332,38 +11332,108 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 355:
+/***/ 357:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(356);
+module.exports = __webpack_require__(358);
 
 
 /***/ }),
 
-/***/ 356:
+/***/ 358:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_izimodal_js_iziModal__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_izimodal_js_iziModal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_izimodal_js_iziModal__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 
 // Initialise imported function as jQuery function
 $.fn.iziModal = __WEBPACK_IMPORTED_MODULE_0_izimodal_js_iziModal___default.a;
 // Use function as normal
-$("#modal").iziModal({
+$(".modal").iziModal({
     width: '50%',
     padding: 20
 });
 
+function gestionarErrores(input, errores) {
+    var noSendForm = false;
+    input = $(input);
+    if ((typeof errores === 'undefined' ? 'undefined' : _typeof(errores)) !== ( true ? 'undefined' : _typeof(undefined))) {
+        input.removeClass("is-invalid");
+        input.addClass("is-invalid");
+        input.nextAll(".invalid-feedback").remove();
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = errores[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var error = _step.value;
+
+                input.after('<div class="invalid-feedback">\n                <strong> ' + error + ' </strong>\n            </div>');
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        noSendForm = true;
+    } else {
+        input.removeClass("is-invalid");
+        input.addClass("is-valid");
+        input.nextAll(".invalid-feedback").remove();
+    }
+    return noSendForm;
+}
+
+function validateForm(target) {
+    var review = $("#review").val();
+    var formData = new FormData();
+    formData.append(target.id, target.value);
+    $(target).parent().next(".spinner").addClass("sk-circle");
+    axios.post('/editReviewAJAX/' + review, formData).then(function (response) {
+        $(target).parent().next(".spinner").removeClass("sk-circle");
+        switch (target.id) {
+            case "title":
+                gestionarErrores(target, response.data.name);
+                break;
+            case "content":
+                gestionarErrores(target, response.data.lastName);
+                break;
+            case "rating":
+                gestionarErrores(target, response.data.username);
+                break;
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
 $(function () {
-    $("#delete").on('click', function (e) {
+    $("#trigger").on('click', function (e) {
         e.preventDefault();
         $("#modal").iziModal('open');
     });
 
+    $("#title, #content, #rating").on('change', function (e) {
+        validateForm(e.target);
+    });
+
     $("#continue").on('click', function () {
-        $("#deleteForm").submit();
+        validateForm();
     });
 });
 

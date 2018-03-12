@@ -60,6 +60,8 @@ Route::group(['prefix' => 'reviews'], function () {
         Route::get("{review}/edit", 'ReviewsController@edit')->name('reviews.edit');
     });
 });
+//Ruta de edicion AJAX
+Route::post('/editReviewAJAX/{review}', 'ReviewsController@updateAJAX'); //AJAX
 //Ruta AJAX paginacion de reviews
 Route::get('/givemereviews/', 'ReviewsController@giveMeReviews'); //AJAX
 

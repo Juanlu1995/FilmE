@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Film;
 use App\Http\Requests\CreateReviewRequest;
+use App\Http\Requests\UpdateReviewAJAXRequest;
 use App\Http\Requests\UpdateReviewRequest;
 use App\Review;
 use App\User;
+use http\Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -80,7 +83,7 @@ class ReviewsController extends Controller
      */
     public function edit(Review $review)
     {
-        if (!Auth::user()->can('update', $review)){
+        if (!Auth::user()->can('update', $review)) {
             return redirect()->back();
         }
         $film = Film::where('id', $review->film_id)->firstOrFail();
@@ -104,7 +107,7 @@ class ReviewsController extends Controller
 
         $review->save();
 
-        return redirect('/reviews/'.$review->id)->with('updated_success', 'Los datos se han actualizado correctamente');
+        return redirect('/reviews/' . $review->id)->with('updated_success', 'Los datos se han actualizado correctamente');
     }
 
     /**
@@ -160,6 +163,24 @@ class ReviewsController extends Controller
             return View::make('reviewsList', array('reviews' => $reviews))->render();
         } else {
             return redirect('/');
+        }
+    }
+
+
+    public function updateAJAX(UpdateReviewAJAXRequest $request){
+        try{
+
+            $review = Review::where('id', $request->input('id'))->firstOrFail();
+
+            $data = array_filter($request->all());
+
+            $review->fill($data);
+
+            $review->save();
+            new JsonResponse("ok");
+
+        }catch (Exception $e){
+            new JsonResponse($e);
         }
     }
 }
