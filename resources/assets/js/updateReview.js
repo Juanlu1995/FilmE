@@ -3,7 +3,7 @@ import iziModal from 'izimodal/js/iziModal';
 $.fn.iziModal = iziModal;
 // Use function as normal
 $(".modal").iziModal({
-    width:'50%',
+    width: '50%',
     padding: 20,
 });
 
@@ -30,11 +30,13 @@ function gestionarErrores(input, errores) {
 
 
 function validateForm(target) {
-let review = $("#review").val();
+    let review = $("#review").val();
+    let rute = `/editReviewAJAX/${review}`;
     let formData = new FormData();
     formData.append(target.id, target.value);
     $(target).parent().next(".spinner").addClass("sk-circle");
-    axios.post('/editReviewAJAX/'+review,
+    axios.post(
+        rute,
         formData
     ).then(function (response) {
         $(target).parent().next(".spinner").removeClass("sk-circle");
@@ -54,9 +56,7 @@ let review = $("#review").val();
     });
 
 
-
 }
-
 
 
 $(function () {

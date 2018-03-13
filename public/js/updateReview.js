@@ -11401,10 +11401,11 @@ function gestionarErrores(input, errores) {
 
 function validateForm(target) {
     var review = $("#review").val();
+    var rute = '/editReviewAJAX/' + review;
     var formData = new FormData();
     formData.append(target.id, target.value);
     $(target).parent().next(".spinner").addClass("sk-circle");
-    axios.post('/editReviewAJAX/' + review, formData).then(function (response) {
+    axios.post(rute, formData).then(function (response) {
         $(target).parent().next(".spinner").removeClass("sk-circle");
         switch (target.id) {
             case "title":

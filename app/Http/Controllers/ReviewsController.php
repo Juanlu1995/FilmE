@@ -168,7 +168,6 @@ class ReviewsController extends Controller
 
 
     public function updateAJAX(UpdateReviewAJAXRequest $request){
-        try{
 
             $review = Review::where('id', $request->input('id'))->firstOrFail();
 
@@ -177,10 +176,7 @@ class ReviewsController extends Controller
             $review->fill($data);
 
             $review->save();
-            new JsonResponse("ok");
 
-        }catch (Exception $e){
-            new JsonResponse($e);
-        }
+            return "ok";
     }
 }
