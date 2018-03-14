@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Film;
+use App\Http\Requests\CreateReviewAJAXRequest;
 use App\Http\Requests\CreateReviewRequest;
 use App\Http\Requests\UpdateReviewAJAXRequest;
 use App\Http\Requests\UpdateReviewRequest;
@@ -202,6 +203,26 @@ class ReviewsController extends Controller
             $review = Review::where('id', $id)->firstOrFail();
             $review->delete();
         }
+        return redirect()->back();
+    }
+
+    public function createAJAX(CreateReviewAJAXRequest $request, $filmId)
+    {
+        if ($request->ajax()) {
+            $title = $request->input('title');
+            $content = $request->input('content');
+            $rating = $request->input('rating');
+
+            $review = Review::create([
+                'title' => $title,
+                'content' => $content,
+                'rating' => $rating,
+                'film_id' => $filmId
+            ]);
+
+            return $review;
+        }
+
         return redirect()->back();
     }
 }

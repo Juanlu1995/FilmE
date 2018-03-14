@@ -11,6 +11,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/updateReview.js', 'public/js')
     .js('resources/assets/js/deleteReview.js', 'public/js')
     .js('resources/assets/js/showReviews.js', 'public/js')
+    .js('resources/assets/js/createReview.js', 'public/js')
     .styles(["node_modules/izimodal/css/iziModal.css"], 'public/css/iziModal.css')
     .styles(['resources/assets/css/spinner.css', 'resources/assets/css/own.css'], 'public/css/all.css')
     .sass('resources/assets/sass/app.scss', 'public/css');
