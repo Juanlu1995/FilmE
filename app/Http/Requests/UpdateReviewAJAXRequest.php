@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 
@@ -37,7 +35,6 @@ class UpdateReviewAJAXRequest extends UpdateReviewRequest
 
     protected function failedValidation($validator)
     {
-
         $errors = $validator->errors();
         $response = new JsonResponse([
             'title' => $errors->get('title'),

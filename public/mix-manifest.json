@@ -4,6 +4,7 @@
     "/css/app.css": "/css/app.css",
     "/js/updateReview.js": "/js/updateReview.js",
     "/js/modals.js": "/js/modals.js",
+    "/js/deleteReview.js": "/js/deleteReview.js",
     "/js/iziModal.min.js": "/js/iziModal.min.js",
     "/js/validateRegister.js": "/js/validateRegister.js",
     "/js/paginateReviews.js": "/js/paginateReviews.js",

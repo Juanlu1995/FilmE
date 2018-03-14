@@ -5,30 +5,23 @@ $.fn.iziModal = iziModal;
 $(".modal").iziModal({
     width: '50%',
     padding: 20,
-});
-
-function gestionarErrores(input, errores) {
-    let noSendForm = false;
-    input = $(input);
-    if (typeof errores !== typeof undefined) {
-        input.removeClass("is-invalid");
-        input.addClass("is-invalid");
-        input.nextAll(".invalid-feedback").remove();
-        for (let error of errores) {
-            input.after(`<div class="invalid-feedback">
-                <strong> ${error} </strong>
-            </div>`);
-        }
-        noSendForm = true;
-    } else {
-        input.removeClass("is-invalid");
-        input.addClass("is-valid");
-        input.nextAll(".invalid-feedback").remove();
+    onClosing: function () {
+        let review = $("#review").val();
+        let rute = `/reviewAJAX/${review}`;
+        axios.get(
+            rute,
+        ).then(function (response) {
+            let title = response.data.title;
+            let content = response.data.content;
+            let rating = `<span class="text-danger">Rating: </span> ${response.data.rating}`;
+            $("#titleReview").html(title);
+            $("#contentReview").html(content);
+            $("#ratingReview").html(rating);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
-    return noSendForm;
-}
-
-
+});
 function validateForm(target) {
     let review = $("#review").val();
     let rute = `/editReviewAJAX/${review}`;
@@ -40,17 +33,6 @@ function validateForm(target) {
         formData
     ).then(function (response) {
         $(target).parent().next(".spinner").removeClass("sk-circle");
-        switch (target.id) {
-            case "title":
-                gestionarErrores(target, response.data.name);
-                break;
-            case "content":
-                gestionarErrores(target, response.data.lastName);
-                break;
-            case "rating":
-                gestionarErrores(target, response.data.username);
-                break;
-        }
     }).catch(function (error) {
         console.log(error);
     });
@@ -60,9 +42,9 @@ function validateForm(target) {
 
 
 $(function () {
-    $("#trigger").on('click', function (e) {
+    $("#triggerUpdate").on('click', function (e) {
         e.preventDefault();
-        $("#modal").iziModal('open');
+        $("#update").iziModal('open');
     });
 
     $("#title, #content, #rating").on('change', function (e) {

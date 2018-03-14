@@ -42,6 +42,6 @@ class ReviewPolicies
      */
     public function delete(User $user, Review $review)
     {
-        //
+        return $user->id === $review->user_id;
     }
 }

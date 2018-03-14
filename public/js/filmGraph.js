@@ -4603,7 +4603,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module)))
 
 /***/ }),
 /* 1 */
@@ -9073,7 +9073,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module)))
 
 /***/ }),
 /* 2 */
@@ -9082,7 +9082,7 @@ return hooks;
 "use strict";
 
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(13);
 module.exports.easing = __webpack_require__(302);
 module.exports.canvas = __webpack_require__(303);
 module.exports.options = __webpack_require__(304);
@@ -19617,7 +19617,8 @@ module.exports.Rectangle = __webpack_require__(313);
 
 /***/ }),
 /* 8 */,
-/* 9 */
+/* 9 */,
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19828,8 +19829,8 @@ module.exports = {
 
 
 /***/ }),
-/* 10 */,
-/* 11 */
+/* 11 */,
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -19857,7 +19858,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20203,7 +20204,6 @@ helpers.getValueAtIndexOrDefault = helpers.valueAtIndexOrDefault;
 
 
 /***/ }),
-/* 13 */,
 /* 14 */,
 /* 15 */,
 /* 16 */,
@@ -44162,7 +44162,7 @@ module.exports = function() {
 "use strict";
 
 
-var helpers = __webpack_require__(12);
+var helpers = __webpack_require__(13);
 
 /**
  * Easing functions adapted from Robert Penner's easing equations.
@@ -44419,7 +44419,7 @@ helpers.easingEffects = effects;
 "use strict";
 
 
-var helpers = __webpack_require__(12);
+var helpers = __webpack_require__(13);
 
 /**
  * @namespace Chart.helpers.canvas
@@ -44640,7 +44640,7 @@ helpers.drawRoundedRectangle = function(ctx) {
 "use strict";
 
 
-var helpers = __webpack_require__(12);
+var helpers = __webpack_require__(13);
 
 /**
  * @alias Chart.helpers.options
@@ -49887,7 +49887,7 @@ module.exports = function(Chart) {
 var defaults = __webpack_require__(3);
 var Element = __webpack_require__(6);
 var helpers = __webpack_require__(2);
-var Ticks = __webpack_require__(9);
+var Ticks = __webpack_require__(10);
 
 defaults._set('scale', {
 	display: true,
@@ -51778,7 +51778,7 @@ module.exports = function(Chart) {
 
 
 var helpers = __webpack_require__(2);
-var Ticks = __webpack_require__(9);
+var Ticks = __webpack_require__(10);
 
 module.exports = function(Chart) {
 
@@ -52058,7 +52058,7 @@ module.exports = function(Chart) {
 
 var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(2);
-var Ticks = __webpack_require__(9);
+var Ticks = __webpack_require__(10);
 
 module.exports = function(Chart) {
 
@@ -52256,7 +52256,7 @@ module.exports = function(Chart) {
 
 
 var helpers = __webpack_require__(2);
-var Ticks = __webpack_require__(9);
+var Ticks = __webpack_require__(10);
 
 module.exports = function(Chart) {
 
@@ -52508,7 +52508,7 @@ module.exports = function(Chart) {
 
 var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(2);
-var Ticks = __webpack_require__(9);
+var Ticks = __webpack_require__(10);
 
 module.exports = function(Chart) {
 

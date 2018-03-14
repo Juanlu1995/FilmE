@@ -160,23 +160,48 @@ class ReviewsController extends Controller
     {
         if (request()->ajax()) {
             $reviews = Review::orderBy('updated_at', 'desc')->paginate(9);
-            return View::make('reviewsList', array('reviews' => $reviews))->render();
+            return View::make('reviews.reviewsList', ['reviews' => $reviews])->render();
         } else {
             return redirect('/');
         }
     }
 
 
-    public function updateAJAX(UpdateReviewAJAXRequest $request){
+    public function updateAJAX(UpdateReviewAJAXRequest $request, $id)
+    {
 
-            $review = Review::where('id', $request->input('id'))->firstOrFail();
+        $review = Review::where('id', $id)->firstOrFail();
 
-            $data = array_filter($request->all());
+        $data = array_filter($request->all());
 
-            $review->fill($data);
+        $review->fill($data);
 
-            $review->save();
+        $review->save();
 
-            return "ok";
+        return "ok";
+    }
+
+
+    public function reviewAJAX(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $review = Review::where('id', $id)->firstOrFail();
+            return [
+                'title' => $review->title,
+                'content' => $review->content,
+                'rating' => $review->rating
+            ];
+        }
+
+        return redirect()->back();
+    }
+
+    public function deleteAJAX(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $review = Review::where('id', $id)->firstOrFail();
+            $review->delete();
+        }
+        return redirect()->back();
     }
 }

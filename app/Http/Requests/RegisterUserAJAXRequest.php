@@ -16,20 +16,20 @@ class RegisterUserAJAXRequest extends RegisterUserRequest
     {
         $rules = array();
 
-        if ($this->exists('name')){
+        if ($this->exists('name')) {
             $rules['name'] = $this->validateName();
         }
 
-        if ($this->exists('lastName')){
+        if ($this->exists('lastName')) {
             $rules['lastName'] = $this->validateLastName();
         }
 
 
-        if ($this->exists('username')){
+        if ($this->exists('username')) {
             $rules['username'] = $this->validateUsername();
         }
 
-        if ($this->exists('email')){
+        if ($this->exists('email')) {
             $rules['email'] = $this->validateEmail();
         }
         return $rules;
@@ -39,7 +39,8 @@ class RegisterUserAJAXRequest extends RegisterUserRequest
      * @param \Illuminate\Contracts\Validation\Validator $validator
      * @throws ValidationException
      */
-    protected function failedValidation($validator) {
+    protected function failedValidation($validator)
+    {
         $errors = $validator->errors();
         $response = new JsonResponse([
             'name' => $errors->get('name'),
