@@ -61,21 +61,12 @@
                     <h3 class="text-primary">Reviews:</h3>
                 </a>
             </div>
-            <carousel :per-page="3" :autoplay="true" :navigation-enabled="true" :easing="'ease-out'"
-                      :scroll-per-page="true" pagination-color="#3CA4E3" :pagination-padding=6 class="my-3"
-                      id="userCarousel">
-                @foreach($user->reviews as $review)
-                    <slide>
-                        <div class="imagebox border border-dark">
-                            <a href="/reviews/{{$review->id}}">
-                                <img class="d-block w-100 imageCarousel" src="{{$review->film->cover}}"
-                                     alt="First slide">
-                                <span class="imagebox-desc">{{$review->film->name}}</span>
-                            </a>
-                        </div>
-                    </slide>
-                @endforeach
-            </carousel>
+
+            <input type="button" id="mostrarReviews" class="btn btn-success mt-3" value="mostrarReviews" user="{{$user->id}}">
+
+            <div id="reviews">
+
+            </div>
 
         </div>
     </div>

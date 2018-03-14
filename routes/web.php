@@ -4,6 +4,9 @@ Route::post('/editReviewAJAX/{id}', 'ReviewsController@updateAJAX'); //AJAX
 Route::get('/reviewAJAX/{id}', 'ReviewsController@reviewAJAX'); //AJAX
 Route::post('/deleteReview/{id}', 'ReviewsController@deleteAJAX'); //AJAX
 
+
+Route::get('/giveuserreviews/{id}', 'UsersController@giveReviewsAJAX'); //AJAX
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

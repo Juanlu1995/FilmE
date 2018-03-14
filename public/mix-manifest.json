@@ -9,6 +9,7 @@
     "/js/validateRegister.js": "/js/validateRegister.js",
     "/js/paginateReviews.js": "/js/paginateReviews.js",
     "/js/paginateIndex.js": "/js/paginateIndex.js",
+    "/js/showReviews.js": "/js/showReviews.js",
     "/js/contributeAutocomplete.js": "/js/contributeAutocomplete.js",
     "/css/iziModal.css": "/css/iziModal.css",
     "/css/all.css": "/css/all.css"

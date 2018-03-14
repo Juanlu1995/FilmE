@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Film;
-use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
-class UsersController extends Controller {
+
+class UsersController extends Controller
+{
 
     private $user;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware(function ($request, $next) {
             $this->user = auth()->user();
 
@@ -29,7 +32,8 @@ class UsersController extends Controller {
      * @param  User user
      * @return \Illuminate\Http\Response
      */
-    public function show($username) {
+    public function show($username)
+    {
         $user = User::with('reviews.film')->where('username', $username)->firstOrFail();
 
 
@@ -44,7 +48,8 @@ class UsersController extends Controller {
      * @param  User user
      * @return \Illuminate\Http\Response
      */
-    public function profile(Request $request) {
+    public function profile(Request $request)
+    {
         $user = $request->user();
         $user = User::with('reviews.film')->findOrFail($user->id);
 
@@ -57,7 +62,8 @@ class UsersController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit() {
+    public function edit()
+    {
         return view('users.edit', ['user' => $this->user]);
     }
 
@@ -72,7 +78,8 @@ class UsersController extends Controller {
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request) {
+    public function update(UpdateUserRequest $request)
+    {
 
         $path = $request->path();
 
@@ -83,11 +90,11 @@ class UsersController extends Controller {
             $user->fill($data);
         } elseif ($path == 'profile/edit/password') {
 
-            if( ! Hash::check($request->get('current_password'), $this->user->password ) ){
+            if (!Hash::check($request->get('current_password'), $this->user->password)) {
                 return redirect()->back()->with('error', 'La constraseña actual no es correcta');
             }
 
-            if( strcmp($request->get('current_password'), $request->get('password')) == 0){
+            if (strcmp($request->get('current_password'), $request->get('password')) == 0) {
                 return redirect()->back()->with('error', 'La nueva contraseña debe ser diferente de la antigua.');
             }
 
@@ -102,7 +109,7 @@ class UsersController extends Controller {
 
         $user->save();
 
-        return redirect('/'.$path)->with('updated_success', 'Los datos se han actualizado correctamente');
+        return redirect('/' . $path)->with('updated_success', 'Los datos se han actualizado correctamente');
     }
 
     /**
@@ -111,7 +118,8 @@ class UsersController extends Controller {
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy() {
+    public function destroy()
+    {
         $this->user->delete();
 
         return redirect('/');
@@ -123,10 +131,11 @@ class UsersController extends Controller {
      *
      * @param Film $film
      */
-    public function userSee(Film $film) {
+    public function userSee(Film $film)
+    {
         $user = User::findOrFail($this->user->id);
 
-        if ($user->seeFilm($film)){
+        if ($user->seeFilm($film)) {
             return redirect()->back();
         }
 
@@ -141,15 +150,27 @@ class UsersController extends Controller {
      *
      * @param Film $film
      */
-    public function userNotSee(Film $film) {
+    public function userNotSee(Film $film)
+    {
         $user = User::findOrFail($this->user->id);
 
-        if (! $user->seeFilm($film)){
+        if (!$user->seeFilm($film)) {
             return redirect()->back();
         }
 
         $user->filmsSee()->detach($film);
 
         return redirect()->back();
+    }
+
+
+    public function giveReviewsAJAX(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $user = User::where('id', $id)->firstOrFail();
+            return View::make('users.partials.userReviews')->with('user', $user)->render();
+        } else {
+            return redirect()->back();
+        }
     }
 }
